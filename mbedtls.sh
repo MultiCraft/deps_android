@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 . sdk.sh
-MBEDTLS_VERSION=3.2.1
+MBEDTLS_VERSION=3.3.0
 
 mkdir -p output/mbedtls/lib/$TARGET_ABI
 mkdir -p deps; cd deps
@@ -27,7 +27,8 @@ cmake .. -DANDROID_STL="c++_static" \
 	-DCMAKE_CXX_FLAGS="$CXXFLAGS -fPIC" \
 	-DCMAKE_INSTALL_PREFIX="." \
 	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake" \
-	-DENABLE_TESTING=OFF
+	-DENABLE_TESTING=OFF \
+	-DENABLE_PROGRAMS=OFF
 
 cmake --build . -j
 make install -s
