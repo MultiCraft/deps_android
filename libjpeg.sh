@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 . sdk.sh
-JPEG_VERSION=2.1.4
+JPEG_VERSION=2.1.5.1
 
 mkdir -p output/libjpeg/lib/$TARGET_ABI
 mkdir -p deps; cd deps
