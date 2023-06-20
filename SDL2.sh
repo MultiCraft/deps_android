@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-SDL2_VERSION=2.26.5
+SDL2_VERSION=2.28.0
 
 . sdk.sh
 
@@ -24,7 +24,7 @@ cmake .. -DANDROID_STL="c++_static" \
     -DANDROID_PLATFORM="$API" \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_C_FLAGS="$CFLAGS" \
-    -DCMAKE_CXX_FLAGS="$CXXFLAGS -fPIC" \
+    -DCMAKE_CXX_FLAGS="$CXXFLAGS" \
     -DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake" \
     -DLIBTYPE=STATIC
 
