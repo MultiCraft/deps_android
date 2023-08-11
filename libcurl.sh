@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 . sdk.sh
-CURL_VERSION=8.1.2
+CURL_VERSION=8.2.1
 
 export ANDR_ROOT=$(pwd)
 
@@ -10,7 +10,7 @@ mkdir -p deps; cd deps
 
 if [ ! -d libcurl-src ]; then
 	wget https://curl.haxx.se/download/curl-$CURL_VERSION.tar.gz
-	tar -xzvf curl-$CURL_VERSION.tar.gz
+	tar -xzf curl-$CURL_VERSION.tar.gz
 	mv curl-$CURL_VERSION libcurl-src
 	rm curl-$CURL_VERSION.tar.gz
 fi
