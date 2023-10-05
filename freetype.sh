@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-FREETYPE_VERSION=2.13.1
+FREETYPE_VERSION=2.13.2
 
 . sdk.sh
 
@@ -8,7 +8,7 @@ mkdir -p output/freetype/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d freetype-src ]; then
-	wget https://download.savannah.gnu.org/releases/freetype/freetype-$FREETYPE_VERSION.tar.gz
+	wget https://sourceforge.net/projects/freetype/files/freetype2/$FREETYPE_VERSION/freetype-$FREETYPE_VERSION.tar.gz
 	tar -xzf freetype-$FREETYPE_VERSION.tar.gz
 	mv freetype-$FREETYPE_VERSION freetype-src
 	rm freetype-$FREETYPE_VERSION.tar.gz
