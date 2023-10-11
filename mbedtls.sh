@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 . sdk.sh
-MBEDTLS_VERSION=3.4.1
+MBEDTLS_VERSION=3.5.0
 
 mkdir -p output/mbedtls/lib/$TARGET_ABI
 mkdir -p deps; cd deps
