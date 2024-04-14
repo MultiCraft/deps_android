@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 . sdk.sh
-PNG_VERSION=1.6.40
+PNG_VERSION=1.6.43
 
 mkdir -p output/libpng/lib/$TARGET_ABI
 mkdir -p deps; cd deps

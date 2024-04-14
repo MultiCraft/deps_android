@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-OPENAL_VERSION=1.22.1
+OPENAL_VERSION=1.22.2
 
 . sdk.sh
 
