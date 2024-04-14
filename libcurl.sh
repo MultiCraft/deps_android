@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 . sdk.sh
-CURL_VERSION=8.5.0
+CURL_VERSION=8.7.1
 
 export ANDR_ROOT=$(pwd)
 
@@ -22,7 +22,7 @@ cd libcurl-src
 	--prefix=/ --disable-shared --enable-static \
 	--disable-debug --disable-verbose --disable-versioned-symbols \
 	--disable-dependency-tracking --disable-libcurl-option \
-	--disable-ares --disable-cookies --disable-crypto-auth --disable-manual \
+	--disable-ares --disable-cookies --disable-manual \
 	--disable-proxy --disable-unix-sockets --without-librtmp \
 	--disable-ftp --disable-ldap --disable-ldaps --disable-rtsp \
 	--disable-dict --disable-telnet --disable-tftp --disable-pop3 \
