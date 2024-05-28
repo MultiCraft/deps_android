@@ -1,16 +1,16 @@
 #!/bin/bash -e
 
 . sdk.sh
-MBEDTLS_VERSION=3.5.2
+MBEDTLS_VERSION=3.6.0
 
 mkdir -p output/mbedtls/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d mbedtls-src ]; then
-	wget https://github.com/Mbed-TLS/mbedtls/archive/refs/tags/v$MBEDTLS_VERSION.tar.gz
-	tar -xzf v$MBEDTLS_VERSION.tar.gz
+	wget https://github.com/Mbed-TLS/mbedtls/releases/download/v$MBEDTLS_VERSION/mbedtls-$MBEDTLS_VERSION.tar.bz2
+	tar -xzf mbedtls-$MBEDTLS_VERSION.tar.bz2
 	mv mbedtls-$MBEDTLS_VERSION mbedtls-src
-	rm v$MBEDTLS_VERSION.tar.gz
+	rm mbedtls-$MBEDTLS_VERSION.tar.bz2
 	mkdir mbedtls-src/build
 fi
 
