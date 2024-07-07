@@ -1,10 +1,10 @@
 #!/bin/bash -e
 
-OPENAL_VERSION=1.22.2
+OPENAL_VERSION=1.23.1
 
 . sdk.sh
 
-export SDL_PATH="$(pwd)/deps/sdl2-src"
+export SDL_PATH="$(pwd)/deps/sdl2-src/build/install/usr/local/lib/cmake/SDL2"
 
 mkdir -p output/openal/lib/$TARGET_ABI
 mkdir -p deps; cd deps
@@ -24,15 +24,15 @@ cmake .. -DANDROID_STL="c++_static" \
 	-DALSOFT_BACKEND_OPENSL=NO \
 	-DALSOFT_BACKEND_WAVE=NO \
 	-DALSOFT_BACKEND_SDL2=YES \
+	-DALSOFT_REQUIRE_SDL2=YES \
 	-DALSOFT_EMBED_HRTF_DATA=NO \
 	-DALSOFT_UPDATE_BUILD_VERSION=NO \
 	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_C_FLAGS="$CFLAGS -I $SDL_PATH" \
-	-DCMAKE_CXX_FLAGS="$CXXFLAGS -fPIC -I $SDL_PATH/inlcude" \
+	-DCMAKE_C_FLAGS="$CFLAGS" \
+	-DCMAKE_CXX_FLAGS="$CXXFLAGS -fPIC" \
 	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake" \
 	-DLIBTYPE=STATIC \
-	-DSDL2_INCLUDE_DIR="$SDL_PATH/include" \
-	-DSDL2_LIBRARY="$SDL_PATH/lib/$TARGET_ABI/libSDL2.a"
+	-DSDL2_DIR="$SDL_PATH"
 
 cmake --build . -j
 

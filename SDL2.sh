@@ -1,20 +1,20 @@
 #!/bin/bash -e
 
-SDL2_VERSION=2.30.3
+SDL2_VERSION=2.30.5
 
 . sdk.sh
 
 mkdir -p output/sdl2/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
-if [ ! -d SDL2-src ]; then
+if [ ! -d sdl2-src ]; then
 	wget https://github.com/libsdl-org/SDL/archive/release-$SDL2_VERSION.tar.gz
 	tar -xzf release-$SDL2_VERSION.tar.gz
 	mv SDL-release-$SDL2_VERSION sdl2-src
 	rm release-$SDL2_VERSION.tar.gz
 fi
 
-cd SDL2-src
+cd sdl2-src
 
 mkdir -p build; cd build
 
@@ -29,6 +29,8 @@ cmake .. -DANDROID_STL="c++_static" \
     -DLIBTYPE=STATIC
 
 cmake --build . -j
+
+DESTDIR="$(pwd)/install" cmake --install .
 
 # update `include` folder
 rm -rf ../../../output/sdl2/include/
