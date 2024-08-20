@@ -1,23 +1,13 @@
 #!/bin/bash -e
 
-# Set ARCH
+# List of ARCH'es
+ARCHS=("armv7" "arm64" "x86_64")
 
-export ARCH="$(grep '^arch' local.properties | sed 's/^.*=[[:space:]]*//')"
+for ARCH in "${ARCHS[@]}"; do
+echo "Building for ARCH: $ARCH"
 
-if [ -z "$ARCH" ];
-then
-	echo "Please specify ARCH"
-	echo "e.g. \"armv7\", \"arm64\" or \"x86_64\""
-	read ARCH
-
-	if [ "$ARCH" != armv7 ] && [ "$ARCH" != arm64 ] && [ "$ARCH" != x86_64 ];
-	then
-		echo "$ARCH is not a valid ARCH"
-		exit 1
-	fi
-
-	echo "arch = $ARCH" >> local.properties
-fi
+sed -i '' '/^arch/d' local.properties
+echo "arch = $ARCH" >> local.properties
 
 # Set NDK path
 export ANDROID_NDK="$(grep '^ndk\.dir' local.properties | sed 's/^.*=[[:space:]]*//')"
@@ -25,7 +15,7 @@ export ANDROID_NDK="$(grep '^ndk\.dir' local.properties | sed 's/^.*=[[:space:]]
 if [ ! -d "$ANDROID_NDK" ];
 then
 	echo "Please specify path of ANDROID NDK"
-	echo "e.g. $HOME/Android/android-ndk-r25"
+	echo "e.g. $HOME/Android/android-ndk-r26"
 	read ANDROID_NDK
 
 	if [ ! -d "$ANDROID_NDK" ];
@@ -36,6 +26,10 @@ then
 
 	echo "ndk.dir = $ANDROID_NDK" >> local.properties
 fi
+
+# Clean the deps
+rm -rf deps
+mkdir deps
 
 # Build libs
 
@@ -52,4 +46,7 @@ sh mbedtls.sh
 sh libcurl.sh
 sh vorbis.sh
 
-echo "Done!"
+echo "Done building for $ARCH!"
+done
+
+echo "All builds completed!"
