@@ -28,8 +28,14 @@ then
 fi
 
 # Clean the deps
-rm -rf deps
+if [ -w deps ]; then
+	rm -rf deps
+else
+	echo "Cannot delete deps: Permission denied"
+fi
+
 mkdir deps
+chmod -R u+w deps
 
 # Build libs
 

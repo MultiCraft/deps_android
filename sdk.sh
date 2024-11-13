@@ -37,7 +37,7 @@ case "$ARCH" in
 		exit 1 ;;
 esac
 
-export API=21
+export API=23
 export CFLAGS="-fvisibility=hidden -fvisibility-inlines-hidden -fexceptions -D__ANDROID_MIN_SDK_VERSION__=$API"
 export CXXFLAGS="$CFLAGS -frtti"
 export NATIVE_API_LEVEL="android-$API"
