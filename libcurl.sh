@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 . sdk.sh
-CURL_VERSION=8.9.1
+CURL_VERSION=8.11.0
 
 export ANDR_ROOT=$(pwd)
 
@@ -26,7 +26,8 @@ cd libcurl-src
 	--disable-proxy --disable-unix-sockets --without-librtmp \
 	--disable-ftp --disable-ldap --disable-ldaps --disable-rtsp \
 	--disable-dict --disable-telnet --disable-tftp --disable-pop3 \
-	--disable-imap --disable-smtp --disable-gopher --disable-sspi
+	--disable-imap --disable-smtp --disable-gopher --disable-sspi \
+	--without-libpsl
 
 make -j
 
