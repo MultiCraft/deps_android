@@ -18,6 +18,7 @@ cd libjpeg-src/build
 
 cmake .. -DANDROID_STL="c++_static" -DANDROID_NATIVE_API_LEVEL="$NATIVE_API_LEVEL" \
 	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_INSTALL_PREFIX="." \
 	-DENABLE_SHARED=OFF \
 	-DANDROID_ABI="$ANDROID_ABI" \
 	-DANDROID_PLATFORM="$API" \
@@ -25,12 +26,11 @@ cmake .. -DANDROID_STL="c++_static" -DANDROID_NATIVE_API_LEVEL="$NATIVE_API_LEVE
 	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake"
 
 cmake --build . -j
-
-make DESTDIR=$PWD/../../../../libjpeg install
+make install -s
 
 # update `include` folder
 rm -rf ../../../../libjpeg/include
-cp -r ../../../../libjpeg/opt/libjpeg-turbo/include ../../../output/libjpeg/include
+cp -r include ../../../output/libjpeg/include
 # update lib
 rm -rf ../../../output/libjpeg/lib/$TARGET_ABI/libjpeg.a
 cp -r libjpeg.a ../../../output/libjpeg/lib/$TARGET_ABI/libjpeg.a
