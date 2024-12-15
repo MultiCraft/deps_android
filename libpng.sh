@@ -7,10 +7,7 @@ mkdir -p output/libpng/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d libpng-src ]; then
-	wget https://download.sourceforge.net/libpng/libpng-$PNG_VERSION.tar.gz
-	tar -xzf libpng-$PNG_VERSION.tar.gz
-	mv libpng-$PNG_VERSION libpng-src
-	rm libpng-$PNG_VERSION.tar.gz
+	git clone --depth 1 -b v$PNG_VERSION https://github.com/pnggroup/libpng libpng-src
 	mkdir libpng-src/build
 fi
 

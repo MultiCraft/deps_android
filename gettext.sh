@@ -7,10 +7,11 @@ mkdir -p output/gettext/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d gettext-src ]; then
-	wget https://ftp.gnu.org/pub/gnu/gettext/gettext-$GETTEXT_VERSION.tar.gz
-	tar -xzf gettext-$GETTEXT_VERSION.tar.gz
+	if [ ! -f "gettext-$GETTEXT_VERSION.tar.xz" ]; then
+		wget https://ftp.gnu.org/pub/gnu/gettext/gettext-$GETTEXT_VERSION.tar.xz
+	fi
+	tar -xzf gettext-$GETTEXT_VERSION.tar.xz
 	mv gettext-$GETTEXT_VERSION gettext-src
-	rm gettext-$GETTEXT_VERSION.tar.gz
 fi
 
 cd gettext-src/gettext-runtime
