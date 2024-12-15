@@ -20,16 +20,19 @@ case "$ARCH" in
 	"armv7")
 		### toolchain config for ARMv7
 		export TARGET_ABI=armeabi-v7a
+		export TARGET_NAME=android-arm
 		export ANDROID_ABI="$TARGET_ABI with NEON"
 		export TARGET=armv7a-linux-androideabi ;;
 	"arm64")
 		### toolchain config for ARM64
 		export TARGET_ABI=arm64-v8a
+		export TARGET_NAME=android-arm64
 		export ANDROID_ABI=$TARGET_ABI
 		export TARGET=aarch64-linux-android ;;
 	"x86_64")
 		### toolchain config for x86_64
 		export TARGET_ABI=x86_64
+		export TARGET_NAME=android-x86_64
 		export ANDROID_ABI=$TARGET_ABI
 		export TARGET=x86_64-linux-android ;;
 	*)

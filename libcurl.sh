@@ -17,8 +17,9 @@ fi
 
 cd libcurl-src
 
+CFLAGS="-I$ANDR_ROOT/deps/openssl-src/include -L$ANDR_ROOT/deps/openssl-src $CFLAGS" \
 ./configure --host=$TARGET \
-	--with-mbedtls="$ANDR_ROOT/deps/mbedtls-src/build" \
+	--with-openssl \
 	--prefix=/ --disable-shared --enable-static \
 	--disable-debug --disable-verbose --disable-versioned-symbols \
 	--disable-dependency-tracking --disable-libcurl-option \

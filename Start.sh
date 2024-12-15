@@ -48,7 +48,7 @@ sh freetype.sh
 sh SDL2.sh
 sh irrlicht.sh
 sh openal.sh
-sh mbedtls.sh
+sh openssl.sh
 sh libcurl.sh
 sh vorbis.sh
 
