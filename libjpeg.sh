@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 . sdk.sh
-JPEG_VERSION=3.0.4
+JPEG_VERSION=3.1.0
 
 mkdir -p output/libjpeg/lib/$TARGET_ABI
 mkdir -p deps; cd deps
@@ -17,14 +17,15 @@ fi
 
 cd libjpeg-src/build
 
-cmake .. -DANDROID_STL="c++_static" -DANDROID_NATIVE_API_LEVEL="$NATIVE_API_LEVEL" \
-	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_INSTALL_PREFIX="." \
-	-DENABLE_SHARED=OFF \
+cmake .. -DANDROID_STL="c++_static"  \
+	-DANDROID_NATIVE_API_LEVEL="$NATIVE_API_LEVEL" \
 	-DANDROID_ABI="$ANDROID_ABI" \
 	-DANDROID_PLATFORM="$API" \
+	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_C_FLAGS_RELEASE="$CFLAGS" \
-	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake"
+	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake" \
+	-DCMAKE_INSTALL_PREFIX="." \
+	-DENABLE_SHARED=OFF
 
 cmake --build . -j
 make install -s

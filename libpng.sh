@@ -13,15 +13,16 @@ fi
 
 cd libpng-src/build
 
-cmake .. -DANDROID_STL="c++_static" -DANDROID_NATIVE_API_LEVEL="$NATIVE_API_LEVEL" \
-	-DCMAKE_BUILD_TYPE=Release \
-	-DPNG_SHARED=OFF \
-	-DPNG_TESTS=OFF \
-	-DPNG_EXECUTABLES=OFF \
+cmake .. -DANDROID_STL="c++_static"  \
+	-DANDROID_NATIVE_API_LEVEL="$NATIVE_API_LEVEL" \
 	-DANDROID_ABI="$ANDROID_ABI" \
 	-DANDROID_PLATFORM="$API" \
+	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_C_FLAGS_RELEASE="$CFLAGS" \
-	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake"
+	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake" \
+	-DPNG_SHARED=OFF \
+	-DPNG_TESTS=OFF \
+	-DPNG_EXECUTABLES=OFF
 
 cmake --build . -j
 

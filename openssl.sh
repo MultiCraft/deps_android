@@ -14,12 +14,15 @@ fi
 cd openssl-src
 
 PATH=$TOOLCHAIN/bin:$PATH
-./Configure $TARGET_NAME no-tests no-shared
+dos2unix Configure
+./Configure $TARGET_NAME no-tests no-shared -U__ANDROID_API__ -D__ANDROID_API__=$API
 make -j
 
 # update `include` folder
 rm -rf ../../output/openssl/include/
-cp -r ./include ../../output/openssl/include
+echo $PWD
+mkdir -p ../../output/openssl/include
+cp -r include/openssl ../../output/openssl/include
 # update lib
 rm -rf ../../output/openssl/lib/$TARGET_ABI/libcrypto.a
 cp -r libcrypto.a ../../output/openssl/lib/$TARGET_ABI/libcrypto.a
