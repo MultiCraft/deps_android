@@ -49,11 +49,9 @@ chmod -R u+w deps
 
 ./gettext.sh
 ./leveldb.sh
-case "$OSTYPE" in
-	linux*)
+if [[ "$OSTYPE" == linux* ]]; then
 	./luajit.sh
-	;;
-esac
+fi
 ./libjpeg.sh
 ./libpng.sh
 ./freetype.sh
