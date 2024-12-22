@@ -39,18 +39,18 @@ chmod -R u+w deps
 
 # Build libs
 
-sh gettext.sh
-sh leveldb.sh
-#sh luajit.sh
-sh libjpeg.sh
-sh libpng.sh
-sh freetype.sh
-sh SDL2.sh
-sh irrlicht.sh
-sh openal.sh
-sh openssl.sh
-sh libcurl.sh
-sh vorbis.sh
+./gettext.sh
+./leveldb.sh
+#./luajit.sh
+./libjpeg.sh
+./libpng.sh
+./freetype.sh
+./SDL2.sh
+./irrlicht.sh
+./openal.sh
+./openssl.sh
+./libcurl.sh
+./vorbis.sh
 
 echo "Done building for $ARCH!"
 done
