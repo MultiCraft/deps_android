@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-. sdk.sh
+. ./sdk.sh
 JPEG_VERSION=3.1.0
 
 mkdir -p output/libjpeg/lib/$TARGET_ABI

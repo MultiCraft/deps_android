@@ -2,7 +2,7 @@
 
 OPENAL_VERSION=1.22.2
 
-. sdk.sh
+. ./sdk.sh
 
 export SDL_PATH="$(pwd)/deps/sdl2-src"
 

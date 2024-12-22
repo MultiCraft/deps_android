@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-. sdk.sh
+. ./sdk.sh
 GETTEXT_VERSION=0.23
 
 mkdir -p output/gettext/lib/$TARGET_ABI

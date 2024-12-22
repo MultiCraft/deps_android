@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-. sdk.sh
+. ./sdk.sh
 MBEDTLS_VERSION=3.6.1
 
 mkdir -p output/mbedtls/lib/$TARGET_ABI

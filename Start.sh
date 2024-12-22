@@ -6,7 +6,7 @@ ARCHS=("armv7" "arm64" "x86_64")
 for ARCH in "${ARCHS[@]}"; do
 echo "Building for ARCH: $ARCH"
 
-sed -i '' '/^arch/d' local.properties
+sed -i '/^arch/d' local.properties
 echo "arch = $ARCH" >> local.properties
 
 # Set NDK path

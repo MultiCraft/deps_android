@@ -2,7 +2,7 @@
 
 FREETYPE_VERSION=2.13.3
 
-. sdk.sh
+. ./sdk.sh
 
 mkdir -p output/freetype/lib/$TARGET_ABI
 mkdir -p deps; cd deps

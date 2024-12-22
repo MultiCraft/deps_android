@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-. sdk.sh
+. ./sdk.sh
 
 mkdir -p output/irrlicht/lib/$TARGET_ABI
 mkdir -p deps; cd deps

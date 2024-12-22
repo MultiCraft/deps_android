@@ -2,7 +2,7 @@
 
 LEVELDB_VERSION=1.23
 
-. sdk.sh
+. ./sdk.sh
 
 mkdir -p output/leveldb/lib/$TARGET_ABI
 mkdir -p deps; cd deps
