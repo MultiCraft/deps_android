@@ -11,6 +11,7 @@ case "$OSTYPE" in
 	sed -i '' '/^arch/d' local.properties
 	;;
 	*)
+	touch local.properties
 	sed -i '/^arch/d' local.properties
 	;;
 esac
