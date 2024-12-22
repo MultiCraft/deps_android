@@ -49,7 +49,11 @@ chmod -R u+w deps
 
 ./gettext.sh
 ./leveldb.sh
-#./luajit.sh
+case "$OSTYPE" in
+	linux*)
+	./luajit.sh
+	;;
+esac
 ./libjpeg.sh
 ./libpng.sh
 ./freetype.sh
