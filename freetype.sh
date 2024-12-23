@@ -2,7 +2,7 @@
 
 FREETYPE_VERSION=2.13.3
 
-. sdk.sh
+. ./sdk.sh
 
 mkdir -p output/freetype/lib/$TARGET_ABI
 mkdir -p deps; cd deps
@@ -11,7 +11,7 @@ if [ ! -d freetype-src ]; then
 	if [ ! -f "freetype-$FREETYPE_VERSION.tar.xz" ]; then
 		wget https://sourceforge.net/projects/freetype/files/freetype2/$FREETYPE_VERSION/freetype-$FREETYPE_VERSION.tar.xz
 	fi
-	tar -xzf freetype-$FREETYPE_VERSION.tar.xz
+	tar -xJf freetype-$FREETYPE_VERSION.tar.xz
 	mv freetype-$FREETYPE_VERSION freetype-src
 	mkdir freetype-src/build
 fi

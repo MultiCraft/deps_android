@@ -6,7 +6,15 @@ ARCHS=("armv7" "arm64" "x86_64")
 for ARCH in "${ARCHS[@]}"; do
 echo "Building for ARCH: $ARCH"
 
-sed -i '' '/^arch/d' local.properties
+case "$OSTYPE" in
+	darwin*)
+	sed -i '' '/^arch/d' local.properties
+	;;
+	*)
+	touch local.properties
+	sed -i '/^arch/d' local.properties
+	;;
+esac
 echo "arch = $ARCH" >> local.properties
 
 # Set NDK path
@@ -39,18 +47,20 @@ chmod -R u+w deps
 
 # Build libs
 
-sh gettext.sh
-sh leveldb.sh
-#sh luajit.sh
-sh libjpeg.sh
-sh libpng.sh
-sh freetype.sh
-sh SDL2.sh
-sh irrlicht.sh
-sh openal.sh
-sh openssl.sh
-sh libcurl.sh
-sh vorbis.sh
+./gettext.sh
+./leveldb.sh
+if [[ "$OSTYPE" == linux* ]]; then
+	./luajit.sh
+fi
+./libjpeg.sh
+./libpng.sh
+./freetype.sh
+./SDL2.sh
+./irrlicht.sh
+./openal.sh
+./openssl.sh
+./libcurl.sh
+./vorbis.sh
 
 echo "Done building for $ARCH!"
 done

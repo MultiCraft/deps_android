@@ -2,7 +2,7 @@
 
 OPENSSL_VERSION=3.4.0
 
-. sdk.sh
+. ./sdk.sh
 
 mkdir -p output/openssl/lib/$TARGET_ABI
 mkdir -p deps; cd deps

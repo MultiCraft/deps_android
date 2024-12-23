@@ -2,7 +2,7 @@
 
 LUAJIT_VERSION=2.1
 
-. sdk.sh
+. ./sdk.sh
 
 mkdir -p output/luajit/lib/$TARGET_ABI
 mkdir -p deps; cd deps

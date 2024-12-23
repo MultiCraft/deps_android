@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-. sdk.sh
+. ./sdk.sh
 GETTEXT_VERSION=0.23
 
 mkdir -p output/gettext/lib/$TARGET_ABI
@@ -10,7 +10,7 @@ if [ ! -d gettext-src ]; then
 	if [ ! -f "gettext-$GETTEXT_VERSION.tar.xz" ]; then
 		wget https://ftp.gnu.org/pub/gnu/gettext/gettext-$GETTEXT_VERSION.tar.xz
 	fi
-	tar -xzf gettext-$GETTEXT_VERSION.tar.xz
+	tar -xJf gettext-$GETTEXT_VERSION.tar.xz
 	mv gettext-$GETTEXT_VERSION gettext-src
 fi
 

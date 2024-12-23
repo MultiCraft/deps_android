@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-. sdk.sh
+. ./sdk.sh
 
 export ANDR_ROOT=$(pwd)
 

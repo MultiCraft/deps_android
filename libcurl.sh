@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-. sdk.sh
+. ./sdk.sh
 CURL_VERSION=8.11.0
 
 export ANDR_ROOT=$(pwd)
