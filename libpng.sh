@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-. sdk.sh
+. ./sdk.sh
 PNG_VERSION=1.6.44
 
 mkdir -p output/libpng/lib/$TARGET_ABI

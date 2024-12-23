@@ -2,7 +2,7 @@
 
 SDL2_VERSION=2.30.10
 
-. sdk.sh
+. ./sdk.sh
 
 mkdir -p output/sdl2/lib/$TARGET_ABI
 mkdir -p deps; cd deps
