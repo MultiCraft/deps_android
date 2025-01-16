@@ -61,6 +61,7 @@ fi
 ./openssl.sh
 ./libcurl.sh
 ./vorbis.sh
+./zstd.sh
 
 echo "Done building for $ARCH!"
 done
