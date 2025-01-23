@@ -1,16 +1,20 @@
 #!/bin/bash -e
 
 . ./sdk.sh
-PNG_VERSION=1.6.44
+PNG_VERSION=1.6.45
 
 mkdir -p output/libpng/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d libpng-src ]; then
-	git clone --depth 1 -b v$PNG_VERSION https://github.com/pnggroup/libpng libpng-src
-	mkdir libpng-src/build
+	if [ ! -f "libpng-v$PNG_VERSION.tar.gz" ]; then
+		wget -O libpng-v$PNG_VERSION.tar.gz https://github.com/pnggroup/libpng/archive/refs/tags/v$PNG_VERSION.tar.gz
+	fi
+	tar -xzf libpng-v$PNG_VERSION.tar.gz
+	mv libpng-$PNG_VERSION libpng-src
 fi
 
+mkdir -p libpng-src/build
 cd libpng-src/build
 
 cmake .. -DANDROID_STL="c++_static"  \
