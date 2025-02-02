@@ -13,6 +13,7 @@ fi
 
 cd openssl-src
 
+CFLAGS="$CFLAGS -fvisibility=hidden -fvisibility-inlines-hidden"
 PATH=$TOOLCHAIN/bin:$PATH
 dos2unix Configure
 ./Configure $TARGET_NAME no-tests no-shared -U__ANDROID_API__ -D__ANDROID_API__=$API
