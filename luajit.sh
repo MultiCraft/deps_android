@@ -29,7 +29,7 @@ make amalg -j \
 	CC="$CC" \
 	TARGET_AR="$AR rcus" \
 	TARGET_STRIP="$STRIP" \
-	TARGET_FLAGS="$CFLAGS -fno-fast-math -Wno-undef-prefix" \
+	TARGET_FLAGS="$CFLAGS -fno-fast-math -Wno-undef-prefix -fPIC" \
 	BUILDMODE=static
 
 # update `src` folder
