@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-OPENSSL_VERSION=3.4.0
+OPENSSL_VERSION=3.4.1
 
 . ./sdk.sh
 
