@@ -56,9 +56,9 @@ fi
 ./libpng.sh
 ./freetype.sh
 ./SDL2.sh
+./openssl.sh
 ./irrlicht.sh
 ./openal.sh
-./openssl.sh
 ./libcurl.sh
 ./vorbis.sh
 ./zstd.sh

@@ -6,7 +6,7 @@ mkdir -p output/irrlicht/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 [ ! -d irrlicht-src ] && \
-	git clone --depth 1 -b SDL2 https://github.com/MoNTE48/Irrlicht irrlicht-src
+	git clone --depth 1 -b SDL2-minizip https://github.com/MoNTE48/Irrlicht irrlicht-src
 
 cd irrlicht-src/source/Irrlicht/Android-SDL2
 
@@ -15,7 +15,7 @@ $ANDROID_NDK/ndk-build -j \
 	NDEBUG=1 \
 	APP_ABI="$TARGET_ABI" \
 	APP_PLATFORM=android-"$API" \
-	APP_CFLAGS="$CFLAGS" \
+	APP_CFLAGS="$CFLAGS -I$OUTPUT_PATH/openssl/include" \
 	APP_CXXFLAGS="$CXXFLAGS -std=gnu++17" \
 	APP_CPPFLAGS="$APP_CXXFLAGS -DNO_IRR_COMPILE_WITH_SDL_TEXTINPUT_ -I$OUTPUT_PATH/libjpeg/include -I$OUTPUT_PATH/libpng/include" \
 	APP_STL="c++_static"
