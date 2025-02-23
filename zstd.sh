@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-ZSTD_VERSION=1.5.6
+ZSTD_VERSION=1.5.7
 
 . sdk.sh
 
