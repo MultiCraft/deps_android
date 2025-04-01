@@ -6,11 +6,11 @@ mkdir -p output/irrlicht/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 [ ! -d irrlicht-src ] && \
-	git clone --depth 1 -b SDL2 https://github.com/MoNTE48/Irrlicht irrlicht-src
+	git clone --depth 1 -b SDL3 https://github.com/deveee/Irrlicht irrlicht-src
 
-cd irrlicht-src/source/Irrlicht/Android-SDL2
+cd irrlicht-src/source/Irrlicht/Android-SDL
 
-export SDL2_PATH="$OUTPUT_PATH/sdl2/"
+export SDL_PATH="$OUTPUT_PATH/sdl3/"
 $ANDROID_NDK/ndk-build -j \
 	NDEBUG=1 \
 	APP_ABI="$TARGET_ABI" \
@@ -25,7 +25,7 @@ rm -rf ../../../../../output/irrlicht/include
 cp -r ../../../include ../../../../../output/irrlicht/include
 # update lib
 rm -rf ../../../../../../../Irrlicht/lib/$TARGET_ABI/libIrrlicht.a
-cp -r ../../../lib/Android-SDL2/$TARGET_ABI/libIrrlicht.a ../../../../../output/irrlicht/lib/$TARGET_ABI/libIrrlicht.a
+cp -r ../../../lib/Android-SDL/$TARGET_ABI/libIrrlicht.a ../../../../../output/irrlicht/lib/$TARGET_ABI/libIrrlicht.a
 # update shaders
 rm -rf ../../../../../output/irrlicht/shaders
 cp -r ../../../media/Shaders ../../../../../output/irrlicht/shaders
