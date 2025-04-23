@@ -26,7 +26,7 @@ cmake .. -DANDROID_STL="c++_static"  \
 	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake" \
 	-DPNG_SHARED=OFF \
 	-DPNG_TESTS=OFF \
-	-DPNG_EXECUTABLES=OFF
+	-DPNG_TOOLS=OFF
 
 cmake --build . -j
 
