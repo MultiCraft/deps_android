@@ -10,7 +10,7 @@ if [ ! -d libpng-src ]; then
 	if [ ! -f "libpng-v$PNG_VERSION.tar.gz" ]; then
 		wget -O libpng-v$PNG_VERSION.tar.gz https://github.com/pnggroup/libpng/archive/refs/tags/v$PNG_VERSION.tar.gz
 	fi
-	tar -xzf libpng-v$PNG_VERSION.tar.gz
+	tar -xaf libpng-v$PNG_VERSION.tar.gz
 	mv libpng-$PNG_VERSION libpng-src
 fi
 

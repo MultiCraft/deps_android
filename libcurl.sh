@@ -12,7 +12,7 @@ if [ ! -d libcurl-src ]; then
 	if [ ! -f "curl-$CURL_VERSION.tar.gz" ]; then
 		wget https://curl.haxx.se/download/curl-$CURL_VERSION.tar.gz
 	fi
-	tar -xzf curl-$CURL_VERSION.tar.gz
+	tar -xaf curl-$CURL_VERSION.tar.gz
 	mv curl-$CURL_VERSION libcurl-src
 fi
 

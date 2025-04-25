@@ -11,7 +11,7 @@ if [ ! -d sdl2-src ]; then
     if [ ! -f "release-$SDL2_VERSION.tar.gz" ]; then
 	   wget https://github.com/libsdl-org/SDL/archive/release-$SDL2_VERSION.tar.gz
     fi
-	tar -xzf release-$SDL2_VERSION.tar.gz
+	tar -xaf release-$SDL2_VERSION.tar.gz
 	mv SDL-release-$SDL2_VERSION sdl2-src
 fi
 
