@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 . ./sdk.sh
-GETTEXT_VERSION=0.25.1
+GETTEXT_VERSION=0.26
 
 mkdir -p output/gettext/lib/$TARGET_ABI
 mkdir -p deps; cd deps
