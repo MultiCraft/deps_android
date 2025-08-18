@@ -50,7 +50,7 @@ fi
 ./libjpeg.sh
 ./libpng.sh
 ./freetype.sh
-./SDL2.sh
+./libSDL.sh
 ./openssl.sh
 ./irrlicht.sh
 ./openal.sh

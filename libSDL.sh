@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-SDL2_VERSION=2.32.8
+SDL_VERSION=2.32.8
 
 . ./sdk.sh
 
@@ -8,11 +8,11 @@ mkdir -p output/sdl2/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d sdl2-src ]; then
-    if [ ! -f "release-$SDL2_VERSION.tar.gz" ]; then
-	   wget https://github.com/libsdl-org/SDL/archive/release-$SDL2_VERSION.tar.gz
+    if [ ! -f "release-$SDL_VERSION.tar.gz" ]; then
+	   wget https://github.com/libsdl-org/SDL/archive/release-$SDL_VERSION.tar.gz
     fi
-	tar -xaf release-$SDL2_VERSION.tar.gz
-	mv SDL-release-$SDL2_VERSION sdl2-src
+	tar -xaf release-$SDL_VERSION.tar.gz
+	mv SDL-release-$SDL_VERSION sdl2-src
 fi
 
 cd sdl2-src
@@ -40,4 +40,4 @@ cp -r ../include ../../../output/sdl2/include
 rm -rf ../../../output/sdl2/lib/$TARGET_ABI/libSDL2.a
 cp -r libSDL2.a ../../../output/sdl2/lib/$TARGET_ABI/libSDL2.a
 
-echo "SDL2 build successful"
+echo "libSDL build successful"
