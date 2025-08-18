@@ -11,7 +11,7 @@ if [ ! -d zstd-src ]; then
 	if [ ! -f "zstd-v$ZSTD_VERSION.tar.gz" ]; then
 		wget -O zstd-v$ZSTD_VERSION.tar.gz https://github.com/facebook/zstd/archive/refs/tags/v$ZSTD_VERSION.tar.gz
 	fi
-	tar -xzf zstd-v$ZSTD_VERSION.tar.gz
+	tar -xaf zstd-v$ZSTD_VERSION.tar.gz
 	mv zstd-$ZSTD_VERSION zstd-src
 fi
 

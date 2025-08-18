@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 . ./sdk.sh
-JPEG_VERSION=3.1.0
+JPEG_VERSION=3.1.1
 
 mkdir -p output/libjpeg/lib/$TARGET_ABI
 mkdir -p deps; cd deps
@@ -10,7 +10,7 @@ if [ ! -d libjpeg-src ]; then
 	if [ ! -f "$JPEG_VERSION.tar.gz" ]; then
 		wget https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/tags/$JPEG_VERSION.tar.gz
 	fi
-	tar -xzf $JPEG_VERSION.tar.gz
+	tar -xaf $JPEG_VERSION.tar.gz
 	mv libjpeg-turbo-$JPEG_VERSION libjpeg-src
 	mkdir libjpeg-src/build
 fi

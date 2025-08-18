@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 . ./sdk.sh
-PNG_VERSION=1.6.47
+PNG_VERSION=1.6.50
 
 mkdir -p output/libpng/lib/$TARGET_ABI
 mkdir -p deps; cd deps
@@ -10,7 +10,7 @@ if [ ! -d libpng-src ]; then
 	if [ ! -f "libpng-v$PNG_VERSION.tar.gz" ]; then
 		wget -O libpng-v$PNG_VERSION.tar.gz https://github.com/pnggroup/libpng/archive/refs/tags/v$PNG_VERSION.tar.gz
 	fi
-	tar -xzf libpng-v$PNG_VERSION.tar.gz
+	tar -xaf libpng-v$PNG_VERSION.tar.gz
 	mv libpng-$PNG_VERSION libpng-src
 fi
 
@@ -26,7 +26,7 @@ cmake .. -DANDROID_STL="c++_static"  \
 	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake" \
 	-DPNG_SHARED=OFF \
 	-DPNG_TESTS=OFF \
-	-DPNG_EXECUTABLES=OFF
+	-DPNG_TOOLS=OFF
 
 cmake --build . -j
 
