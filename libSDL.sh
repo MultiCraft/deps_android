@@ -4,18 +4,18 @@ SDL_VERSION=3.2.8
 
 . ./sdk.sh
 
-mkdir -p output/sdl3/lib/$TARGET_ABI
+mkdir -p output/libSDL/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
-if [ ! -d sdl3-src ]; then
+if [ ! -d libSDL-src ]; then
     if [ ! -f "release-$SDL_VERSION.tar.gz" ]; then
 	   wget https://github.com/libsdl-org/SDL/archive/release-$SDL_VERSION.tar.gz
     fi
 	tar -xzf release-$SDL_VERSION.tar.gz
-	mv SDL-release-$SDL_VERSION sdl3-src
+	mv SDL-release-$SDL_VERSION libSDL-src
 fi
 
-cd sdl3-src
+cd libSDL-src
 
 mkdir -p build; cd build
 
@@ -35,10 +35,10 @@ cmake --build . -j
 DESTDIR="$(pwd)/install" cmake --install .
 
 # update `include` folder
-rm -rf ../../../output/sdl3/include/
-cp -r ../include ../../../output/sdl3/include
+rm -rf ../../../output/libSDL/include/
+cp -r ../include ../../../output/libSDL/include
 # update lib
-rm -rf ../../../output/sdl3/lib/$TARGET_ABI/libSDL3.a
-cp -r libSDL3.a ../../../output/sdl3/lib/$TARGET_ABI/libSDL3.a
+rm -rf ../../../output/libSDL/lib/$TARGET_ABI/libSDL.a
+cp -r libSDL3.a ../../../output/libSDL/lib/$TARGET_ABI/libSDL.a
 
 echo "libSDL build successful"

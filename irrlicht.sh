@@ -10,7 +10,7 @@ mkdir -p deps; cd deps
 
 cd irrlicht-src/source/Irrlicht/Android-SDL
 
-export SDL_PATH="$OUTPUT_PATH/sdl3/"
+export SDL_PATH="$OUTPUT_PATH/libSDL/"
 $ANDROID_NDK/ndk-build -j \
 	NDEBUG=1 \
 	APP_ABI="$TARGET_ABI" \
