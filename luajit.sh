@@ -23,6 +23,7 @@ else
 	HOST_CC="clang -m64"
 fi
 
+CFLAGS=$CFLAGS_NO_FAST
 make amalg -j \
 	HOST_CC="$HOST_CC" \
 	TARGET_SYS=Linux \
