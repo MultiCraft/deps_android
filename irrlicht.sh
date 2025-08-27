@@ -17,7 +17,7 @@ $ANDROID_NDK/ndk-build -j \
 	APP_PLATFORM=android-"$API" \
 	APP_CFLAGS="$CFLAGS -I$OUTPUT_PATH/openssl/include" \
 	APP_CXXFLAGS="$CXXFLAGS -std=gnu++17" \
-	APP_CPPFLAGS="$APP_CXXFLAGS -DNO_IRR_COMPILE_WITH_SDL_TEXTINPUT_ -I$OUTPUT_PATH/libjpeg/include -I$OUTPUT_PATH/libpng/include" \
+	APP_CPPFLAGS="$APP_CXXFLAGS -I$OUTPUT_PATH/libjpeg/include -I$OUTPUT_PATH/libpng/include" \
 	APP_STL="c++_static"
 
 # update `include` folder
