@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-SDL_VERSION=3.2.22
+SDL_VERSION=3.2.24
 
 . ./sdk.sh
 
@@ -8,9 +8,9 @@ mkdir -p output/libSDL/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d libSDL-src ]; then
-    if [ ! -f "release-$SDL_VERSION.tar.gz" ]; then
-	   wget https://github.com/libsdl-org/SDL/archive/release-$SDL_VERSION.tar.gz
-    fi
+	if [ ! -f "release-$SDL_VERSION.tar.gz" ]; then
+		wget https://github.com/libsdl-org/SDL/archive/release-$SDL_VERSION.tar.gz
+	fi
 	tar -xzf release-$SDL_VERSION.tar.gz
 	mv SDL-release-$SDL_VERSION libSDL-src
 fi
@@ -20,15 +20,25 @@ cd libSDL-src
 mkdir -p build; cd build
 
 cmake .. -DANDROID_STL="c++_static" \
-    -DANDROID_NATIVE_API_LEVEL="$NATIVE_API_LEVEL" \
-    -DANDROID_ABI="$ANDROID_ABI" \
-    -DANDROID_PLATFORM="$API" \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_C_FLAGS="$CFLAGS" \
-    -DCMAKE_CXX_FLAGS="$CXXFLAGS" \
-    -DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake" \
-    -DSDL_STATIC=1 \
-    -DSDL_SHARED=0
+	-DANDROID_NATIVE_API_LEVEL="$NATIVE_API_LEVEL" \
+	-DANDROID_ABI="$ANDROID_ABI" \
+	-DANDROID_PLATFORM="$API" \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_C_FLAGS="$CFLAGS" \
+	-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
+	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake" \
+	-DSDL_STATIC=1 \
+	-DSDL_SHARED=0 \
+	-DSDL_AUDIO=OFF \
+	-DSDL_RENDER=OFF \
+	-DSDL_CAMERA=OFF \
+	-DSDL_METAL=OFF \
+	-DSDL_GPU=OFF \
+	-DSDL_HAPTIC=OFF \
+	-DSDL_POWER=OFF \
+	-DSDL_DIALOG=OFF \
+	-DSDL_TESTS=OFF \
+	-DSDL_EXAMPLES=OFF
 
 cmake --build . -j
 
