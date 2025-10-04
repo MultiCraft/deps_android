@@ -18,7 +18,7 @@ fi
 
 cd freetype-src/build
 
-cmake .. -DANDROID_STL="c++_static"  \
+cmake .. -DANDROID_STL="c++_static" \
 	-DANDROID_NATIVE_API_LEVEL="$NATIVE_API_LEVEL" \
 	-DANDROID_ABI="$ANDROID_ABI" \
 	-DANDROID_PLATFORM="$API" \
