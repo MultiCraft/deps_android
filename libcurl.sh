@@ -1,9 +1,7 @@
 #!/bin/bash -e
 
 . ./sdk.sh
-CURL_VERSION=8.16.0
-
-export ANDR_ROOT=$(pwd)
+CURL_VERSION=8.17.0
 
 mkdir -p output/libcurl/lib/$TARGET_ABI
 mkdir -p deps; cd deps

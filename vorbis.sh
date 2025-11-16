@@ -2,8 +2,6 @@
 
 . ./sdk.sh
 
-export ANDR_ROOT=$(pwd)
-
 mkdir -p output/vorbis/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 

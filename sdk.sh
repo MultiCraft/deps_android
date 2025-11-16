@@ -54,7 +54,7 @@ case "$OSTYPE" in
 		echo "Configured for Linux" ;;
 	darwin*)
 		export TOOLCHAIN=$ANDROID_NDK/toolchains/llvm/prebuilt/darwin-x86_64
-		export MACOSX_DEPLOYMENT_TARGET=10.15
+		export MACOSX_DEPLOYMENT_TARGET=11.0
 		echo "Configured for Mac OS" ;;
 	*)
 		echo "Just use right OS instead $OSTYPE"
