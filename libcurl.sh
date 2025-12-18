@@ -16,9 +16,13 @@ fi
 
 cd libcurl-src
 
-CFLAGS="-I$ANDR_ROOT/deps/openssl-src/include -L$ANDR_ROOT/deps/openssl-src $CFLAGS" \
+INCLUDE_DIRS="-I$ANDR_ROOT/output/openssl/include -I$ANDR_ROOT/output/nghttp2/include"
+LIBRARY_DIRS="-L$ANDR_ROOT/output/openssl/lib/$TARGET_ABI -L$ANDR_ROOT/output/nghttp2/lib/$TARGET_ABI"
+
+CFLAGS="$INCLUDE_DIRS $LIBRARY_DIRS $CFLAGS" \
 ./configure --host=$TARGET \
 	--with-openssl \
+	--with-nghttp2 \
 	--prefix=/ --disable-shared --enable-static \
 	--disable-debug --disable-verbose --disable-versioned-symbols \
 	--disable-dependency-tracking --disable-libcurl-option \
