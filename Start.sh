@@ -54,6 +54,7 @@ fi
 ./openssl.sh
 ./irrlicht.sh
 ./openal.sh
+./nghttp2.sh
 ./libcurl.sh
 ./vorbis.sh
 ./zstd.sh
