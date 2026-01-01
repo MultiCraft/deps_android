@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-SDL_VERSION=3.2.28
+SDL_VERSION=3.2.30
 
 . ./sdk.sh
 
@@ -27,8 +27,8 @@ cmake .. -DANDROID_STL="c++_static" \
 	-DCMAKE_C_FLAGS="$CFLAGS" \
 	-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
 	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake" \
-	-DSDL_STATIC=1 \
-	-DSDL_SHARED=0 \
+	-DSDL_STATIC=ON \
+	-DSDL_SHARED=OFF \
 	-DSDL_AUDIO=OFF \
 	-DSDL_RENDER=OFF \
 	-DSDL_CAMERA=OFF \
@@ -38,11 +38,12 @@ cmake .. -DANDROID_STL="c++_static" \
 	-DSDL_POWER=OFF \
 	-DSDL_DIALOG=OFF \
 	-DSDL_TESTS=OFF \
-	-DSDL_EXAMPLES=OFF
+	-DSDL_EXAMPLES=OFF \
+	-DSDL_VULKAN=OFF \
+	-DCMAKE_INSTALL_PREFIX="$(pwd)/install"
 
 cmake --build . -j
-
-DESTDIR="$(pwd)/install" cmake --install .
+cmake --install .
 
 # update `include` folder
 rm -rf ../../../output/libSDL/include/
