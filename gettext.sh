@@ -7,9 +7,7 @@ mkdir -p output/gettext/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d gettext-src ]; then
-	if [ ! -f "gettext-$GETTEXT_VERSION.tar.xz" ]; then
-		wget https://fossies.org/linux/misc/gettext-$GETTEXT_VERSION.tar.xz
-	fi
+	wget -nc https://fossies.org/linux/misc/gettext-$GETTEXT_VERSION.tar.xz
 	tar -xaf gettext-$GETTEXT_VERSION.tar.xz
 	mv gettext-$GETTEXT_VERSION gettext-src
 fi

@@ -8,10 +8,8 @@ mkdir -p output/libSDL/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d libSDL-src ]; then
-	if [ ! -f "release-$SDL_VERSION.tar.gz" ]; then
-		wget https://github.com/libsdl-org/SDL/archive/release-$SDL_VERSION.tar.gz
-	fi
-	tar -xzf release-$SDL_VERSION.tar.gz
+	wget -nc -O libsdl-$SDL_VERSION.tar.gz https://github.com/libsdl-org/SDL/archive/release-$SDL_VERSION.tar.gz
+	tar -xzf libsdl-$SDL_VERSION.tar.gz
 	mv SDL-release-$SDL_VERSION libSDL-src
 fi
 

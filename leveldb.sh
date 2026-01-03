@@ -8,7 +8,9 @@ mkdir -p output/leveldb/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d leveldb-src ]; then
-	git clone -b $LEVELDB_VERSION --depth 1 https://github.com/google/leveldb leveldb-src
+	wget -nc -O leveldb-$LEVELDB_VERSION.tar.gz https://github.com/google/leveldb/archive/refs/tags/$LEVELDB_VERSION.tar.gz
+	tar -xzf leveldb-$LEVELDB_VERSION.tar.gz
+	mv leveldb-$LEVELDB_VERSION leveldb-src
 	mkdir leveldb-src/build
 fi
 

@@ -7,10 +7,8 @@ mkdir -p output/libjpeg/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d libjpeg-src ]; then
-	if [ ! -f "$JPEG_VERSION.tar.gz" ]; then
-		wget https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/tags/$JPEG_VERSION.tar.gz
-	fi
-	tar -xaf $JPEG_VERSION.tar.gz
+	wget -nc -O libjpeg-$JPEG_VERSION.tar.gz https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/tags/$JPEG_VERSION.tar.gz
+	tar -xaf libjpeg-$JPEG_VERSION.tar.gz
 	mv libjpeg-turbo-$JPEG_VERSION libjpeg-src
 	mkdir libjpeg-src/build
 fi

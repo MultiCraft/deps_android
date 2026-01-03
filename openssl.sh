@@ -8,7 +8,9 @@ mkdir -p output/openssl/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d openssl-src ]; then
-	git clone -b openssl-$OPENSSL_VERSION --depth 1 https://github.com/openssl/openssl.git openssl-src
+	wget -nc https://github.com/openssl/openssl/releases/download/openssl-$OPENSSL_VERSION/openssl-$OPENSSL_VERSION.tar.gz
+	tar -xzf openssl-$OPENSSL_VERSION.tar.gz
+	mv openssl-$OPENSSL_VERSION openssl-src
 fi
 
 cd openssl-src

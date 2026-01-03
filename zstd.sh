@@ -8,10 +8,8 @@ mkdir -p output/zstd/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d zstd-src ]; then
-	if [ ! -f "zstd-v$ZSTD_VERSION.tar.gz" ]; then
-		wget -O zstd-v$ZSTD_VERSION.tar.gz https://github.com/facebook/zstd/archive/refs/tags/v$ZSTD_VERSION.tar.gz
-	fi
-	tar -xaf zstd-v$ZSTD_VERSION.tar.gz
+	wget -nc -O zstd-$ZSTD_VERSION.tar.gz https://github.com/facebook/zstd/archive/refs/tags/v$ZSTD_VERSION.tar.gz
+	tar -xaf zstd-$ZSTD_VERSION.tar.gz
 	mv zstd-$ZSTD_VERSION zstd-src
 fi
 

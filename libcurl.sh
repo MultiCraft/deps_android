@@ -7,9 +7,7 @@ mkdir -p output/libcurl/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d libcurl-src ]; then
-	if [ ! -f "curl-$CURL_VERSION.tar.gz" ]; then
-		wget https://curl.haxx.se/download/curl-$CURL_VERSION.tar.gz
-	fi
+	wget -nc https://curl.haxx.se/download/curl-$CURL_VERSION.tar.gz
 	tar -xaf curl-$CURL_VERSION.tar.gz
 	mv curl-$CURL_VERSION libcurl-src
 fi

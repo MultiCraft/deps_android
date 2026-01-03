@@ -8,9 +8,7 @@ mkdir -p output/freetype/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d freetype-src ]; then
-	if [ ! -f "freetype-$FREETYPE_VERSION.tar.xz" ]; then
-		wget https://sourceforge.net/projects/freetype/files/freetype2/$FREETYPE_VERSION/freetype-$FREETYPE_VERSION.tar.xz
-	fi
+	wget -nc https://sourceforge.net/projects/freetype/files/freetype2/$FREETYPE_VERSION/freetype-$FREETYPE_VERSION.tar.xz
 	tar -xaf freetype-$FREETYPE_VERSION.tar.xz
 	mv freetype-$FREETYPE_VERSION freetype-src
 	mkdir freetype-src/build

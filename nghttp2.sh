@@ -8,10 +8,8 @@ mkdir -p output/nghttp2/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d nghttp2-src ]; then
-	if [ ! -f "release-$NGHTTP2_VERSION.tar.gz" ]; then
-		wget -O nghttp2-v$NGHTTP2_VERSION.tar.gz https://github.com/nghttp2/nghttp2/archive/v$NGHTTP2_VERSION.tar.gz
-	fi
-	tar -xzf nghttp2-v$NGHTTP2_VERSION.tar.gz
+	wget -nc -O nghttp2-$NGHTTP2_VERSION.tar.gz https://github.com/nghttp2/nghttp2/archive/v$NGHTTP2_VERSION.tar.gz
+	tar -xzf nghttp2-$NGHTTP2_VERSION.tar.gz
 	mv nghttp2-$NGHTTP2_VERSION nghttp2-src
 fi
 
