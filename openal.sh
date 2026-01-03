@@ -1,14 +1,17 @@
 #!/bin/bash -e
 
-OPENAL_VERSION=1.24.3
+OPENAL_VERSION=1.25.0
 
 . ./sdk.sh
+
+#export SDL_PATH="$(pwd)/deps/libSDL-src/build/install"
 
 mkdir -p output/openal/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d openal-src ]; then
-	git clone -b $OPENAL_VERSION --depth 1 https://github.com/kcat/openal-soft openal-src
+	git clone -b $OPENAL_VERSION https://github.com/kcat/openal-soft openal-src # --depth 1
+	git -C openal-src cherry-pick 85c195b9705162566e092ad6683a4d616d62967d
 fi
 
 cd openal-src/build
@@ -22,6 +25,7 @@ cmake .. -DANDROID_STL="c++_static" \
 	-DALSOFT_BACKEND_OPENSL=YES \
 	-DALSOFT_BACKEND_WAVE=NO \
 	-DALSOFT_BACKEND_SDL2=NO \
+	-DALSOFT_BACKEND_SDL3=NO \
 	-DALSOFT_EMBED_HRTF_DATA=NO \
 	-DALSOFT_UPDATE_BUILD_VERSION=NO \
 	-DCMAKE_BUILD_TYPE=Release \
@@ -29,6 +33,7 @@ cmake .. -DANDROID_STL="c++_static" \
 	-DCMAKE_CXX_FLAGS="$CXXFLAGS -I" \
 	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake" \
 	-DLIBTYPE=STATIC
+#	-DSDL3_DIR="$SDL_PATH/lib/cmake/SDL3"
 
 cmake --build . -j
 
