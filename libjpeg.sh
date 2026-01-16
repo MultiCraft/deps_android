@@ -28,11 +28,11 @@ cmake .. -DANDROID_STL="c++_static" \
 cmake --build . -j
 make install -s
 
-# update `include` folder
+# update headers
 rm -rf ../../../../libjpeg/include
 cp -r include ../../../output/libjpeg/include
 # update lib
 rm -rf ../../../output/libjpeg/lib/$TARGET_ABI/libjpeg.a
-cp -r libjpeg.a ../../../output/libjpeg/lib/$TARGET_ABI/libjpeg.a
+cp libjpeg.a ../../../output/libjpeg/lib/$TARGET_ABI/libjpeg.a
 
 echo "libjpeg build successful"

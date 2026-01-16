@@ -31,12 +31,12 @@ cmake .. -DANDROID_STL="c++_static" \
 
 cmake --build . -j
 
-# update `include` folder
+# update headers
 rm -rf ../../../../../output/zstd/include/
 mkdir -p ../../../../../output/zstd/include
 cp -r ../../../lib/*.h ../../../../../output/zstd/include
 # update lib
 rm -rf ../../../../../output/zstd/lib/$TARGET_ABI/libzstd.a
-cp -r ./lib/libzstd.a ../../../../../output/zstd/lib/$TARGET_ABI/libzstd.a
+cp  ./lib/libzstd.a ../../../../../output/zstd/lib/$TARGET_ABI/libzstd.a
 
 echo "Zstd build successful"

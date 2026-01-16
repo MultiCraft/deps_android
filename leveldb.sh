@@ -31,11 +31,11 @@ cmake .. -DANDROID_STL="c++_static" \
 
 cmake --build . -j
 
-# update `include` folder
+# update headers
 rm -rf ../../../output/leveldb/include/
 cp -r ../include ../../../output/leveldb/include
 # update lib
 rm -rf ../../../output/leveldb/lib/$TARGET_ABI/libleveldb.a
-cp -r libleveldb.a ../../../output/leveldb/lib/$TARGET_ABI/libleveldb.a
+cp libleveldb.a ../../../output/leveldb/lib/$TARGET_ABI/libleveldb.a
 
 echo "LevelDB build successful"

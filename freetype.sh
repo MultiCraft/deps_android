@@ -34,12 +34,12 @@ cmake .. -DANDROID_STL="c++_static" \
 
 cmake --build . -j
 
-# update `include` folder
+# update headers
 rm -rf ../../../output/freetype/include/
 cp -r ../include ../../../output/freetype/include
 rm -rf ../../../output/freetype/include/dlg
 # update lib
 rm -rf ../../../output/freetype/lib/$TARGET_ABI/libfreetype.a
-cp -r libfreetype.a ../../../output/freetype/lib/$TARGET_ABI/libfreetype.a
+cp libfreetype.a ../../../output/freetype/lib/$TARGET_ABI/libfreetype.a
 
 echo "Freetype build successful"

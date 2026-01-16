@@ -43,11 +43,11 @@ cmake .. -DANDROID_STL="c++_static" \
 cmake --build . -j
 cmake --install .
 
-# update `include` folder
+# update headers
 rm -rf ../../../output/libSDL/include/
 cp -r ../include ../../../output/libSDL/include
 # update lib
 rm -rf ../../../output/libSDL/lib/$TARGET_ABI/libSDL.a
-cp -r libSDL3.a ../../../output/libSDL/lib/$TARGET_ABI/libSDL.a
+cp libSDL3.a ../../../output/libSDL/lib/$TARGET_ABI/libSDL.a
 
 echo "libSDL build successful"

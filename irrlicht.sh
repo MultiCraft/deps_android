@@ -20,12 +20,12 @@ $ANDROID_NDK/ndk-build -j \
 	APP_CPPFLAGS="$APP_CXXFLAGS -I$OUTPUT_PATH/libjpeg/include -I$OUTPUT_PATH/libpng/include" \
 	APP_STL="c++_static"
 
-# update `include` folder
+# update headers
 rm -rf ../../../../../output/irrlicht/include
 cp -r ../../../include ../../../../../output/irrlicht/include
 # update lib
 rm -rf ../../../../../../../Irrlicht/lib/$TARGET_ABI/libIrrlicht.a
-cp -r ../../../lib/Android-SDL/$TARGET_ABI/libIrrlicht.a ../../../../../output/irrlicht/lib/$TARGET_ABI/libIrrlicht.a
+cp ../../../lib/Android-SDL/$TARGET_ABI/libIrrlicht.a ../../../../../output/irrlicht/lib/$TARGET_ABI/libIrrlicht.a
 # update shaders
 rm -rf ../../../../../output/irrlicht/shaders
 cp -r ../../../media/Shaders ../../../../../output/irrlicht/shaders

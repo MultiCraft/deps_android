@@ -20,12 +20,13 @@ cd gettext-src/gettext-runtime
 
 make -j
 
-# update `include` folder
+# update headers
 rm -rf ../../../output/gettext/include
 mkdir -p ../../../output/gettext/include
-cp -r intl/libintl.h ../../../output/gettext/include/libintl.h
+cp intl/libintl.h ../../../output/gettext/include/libintl.h
+
 # update lib
 rm -rf ../../../output/gettext/lib/$TARGET_ABI/libintl.a
-cp -r intl/.libs/libintl.a ../../../output/gettext/lib/$TARGET_ABI/libintl.a
+cp intl/.libs/libintl.a ../../../output/gettext/lib/$TARGET_ABI/libintl.a
 
 echo "Gettext build successful"

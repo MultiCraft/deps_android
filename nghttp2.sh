@@ -37,13 +37,13 @@ cmake .. -DANDROID_STL="c++_static" \
 
 cmake --build . -j
 
-# update `include` folder
+# update headers
 rm -rf ../../../output/nghttp2/include/
 mkdir -p ../../../output/nghttp2/include/nghttp2
 cp -r ../lib/includes/nghttp2/*.h ../../../output/nghttp2/include/nghttp2
 cp -r lib/includes/nghttp2/*.h ../../../output/nghttp2/include/nghttp2
 # update lib
 rm -rf ../../../output/nghttp2/lib/$TARGET_ABI/libnghttp2.a
-cp -r lib/libnghttp2.a ../../../output/nghttp2/lib/$TARGET_ABI/libnghttp2.a
+cp lib/libnghttp2.a ../../../output/nghttp2/lib/$TARGET_ABI/libnghttp2.a
 
 echo "nghttp2 build successful"

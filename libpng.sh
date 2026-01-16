@@ -28,13 +28,13 @@ cmake .. -DANDROID_STL="c++_static" \
 
 cmake --build . -j
 
-# update `include` folder
+# update headers
 rm -rf ../../../output/libpng/include
 mkdir -p ../../../output/libpng/include
 cp -v ../*.h ../../../output/libpng/include
 cp -v pnglibconf.h ../../../output/libpng/include
 # update lib
 rm -rf ../../../output/libpng/lib/$TARGET_ABI/libpng.a
-cp -r libpng16.a ../../../output/libpng/lib/$TARGET_ABI/libpng.a
+cp libpng16.a ../../../output/libpng/lib/$TARGET_ABI/libpng.a
 
 echo "libpng build successful"

@@ -38,6 +38,6 @@ mkdir -p ../../output/luajit/include
 cp src/*.h ../../output/luajit/include/
 # update lib
 rm -rf ../../output/luajit/lib/$TARGET_ABI/libluajit.a
-cp -r src/libluajit.a ../../output/luajit/lib/$TARGET_ABI/
+cp src/libluajit.a ../../output/luajit/lib/$TARGET_ABI/libluajit.a
 
 echo "LuaJIT build successful"

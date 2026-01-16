@@ -33,11 +33,11 @@ CFLAGS="$INCLUDE_DIRS $LIBRARY_DIRS $CFLAGS" \
 
 make -j
 
-# update `include` folder
+# update headers
 rm -rf ../../output/libcurl/include
 cp -r include ../../output/libcurl/
 # update lib
 rm -rf ../../output/libcurl/lib/$TARGET_ABI/libcurl.a
-cp -r lib/.libs/libcurl.a ../../output/libcurl/lib/$TARGET_ABI/
+cp -r lib/.libs/libcurl.a ../../output/libcurl/lib/$TARGET_ABI/libcurl.a
 
 echo "libcurl build successful"

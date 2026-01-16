@@ -37,11 +37,11 @@ cmake .. -DANDROID_STL="c++_static" \
 
 cmake --build . -j
 
-# update `include` folder
+# update headers
 rm -rf ../../../output/openal/include/
 cp -r ../include ../../../output/openal/include
 # update lib
 rm -rf ../../../output/openal/lib/$TARGET_ABI/libopenal.a
-cp -r libopenal.a ../../../output/openal/lib/$TARGET_ABI/libopenal.a
+cp libopenal.a ../../../output/openal/lib/$TARGET_ABI/libopenal.a
 
 echo "OpenAL-Soft build successful"
