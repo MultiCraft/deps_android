@@ -41,8 +41,8 @@ case "$ARCH" in
 esac
 
 export API=23
-export CFLAGS="-Ofast -D__ANDROID_MIN_SDK_VERSION__=$API"
-export CFLAGS_NO_FAST="-O3 -D__ANDROID_MIN_SDK_VERSION__=$API"
+export CFLAGS="-Ofast -flto -fPIC -D__ANDROID_MIN_SDK_VERSION__=$API"
+export CFLAGS_NO_FAST="-O3 -fPIC -D__ANDROID_MIN_SDK_VERSION__=$API"
 export CXXFLAGS="$CFLAGS -fexceptions -frtti"
 export NATIVE_API_LEVEL="android-$API"
 
