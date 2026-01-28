@@ -49,6 +49,8 @@ if [[ "$OSTYPE" == linux* ]]; then
 fi
 ./libjpeg.sh
 ./libpng.sh
+./freetype.sh bootstrap
+./harfbuzz.sh
 ./freetype.sh
 ./libSDL.sh
 ./openssl.sh
