@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 . ./sdk.sh
-CURL_VERSION=8.17.0
+CURL_VERSION=8.18.0
 
 mkdir -p output/libcurl/lib/$TARGET_ABI
 mkdir -p deps; cd deps
