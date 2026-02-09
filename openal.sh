@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-OPENAL_VERSION=1.25.0
+OPENAL_VERSION=1.25.1
 
 . ./sdk.sh
 
@@ -10,8 +10,7 @@ mkdir -p output/openal/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d openal-src ]; then
-	git clone -b $OPENAL_VERSION https://github.com/kcat/openal-soft openal-src # --depth 1
-	git -C openal-src cherry-pick --no-commit 85c195b9705162566e092ad6683a4d616d62967d
+	git clone -b $OPENAL_VERSION --depth 1 https://github.com/kcat/openal-soft openal-src
 fi
 
 cd openal-src/build
