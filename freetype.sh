@@ -11,10 +11,21 @@ if [ ! -d freetype-src ]; then
 	wget -nc https://sourceforge.net/projects/freetype/files/freetype2/$FREETYPE_VERSION/freetype-$FREETYPE_VERSION.tar.xz
 	tar -xaf freetype-$FREETYPE_VERSION.tar.xz
 	mv freetype-$FREETYPE_VERSION freetype-src
+	mkdir freetype-src/build-bootstrap
 	mkdir freetype-src/build
 fi
 
-cd freetype-src/build
+if [ ! -z "$1" ] && [ "$1" = "bootstrap" ]; then
+	cd freetype-src/build-bootstrap
+	HARFBUZZ_FLAGS="-DFT_DISABLE_HARFBUZZ=TRUE"
+else
+	cd freetype-src/build
+	HARFBUZZ_FLAGS=" \
+		-DFT_REQUIRE_HARFBUZZ=TRUE \
+		-DFT_DYNAMIC_HARFBUZZ=FALSE \
+		-DHarfBuzz_LIBRARY=$ANDR_ROOT/output/harfbuzz/lib/$TARGET_ABI/libharfbuzz.a \
+		-DHarfBuzz_INCLUDE_DIR=$ANDR_ROOT/output/harfbuzz/include/harfbuzz"
+fi
 
 cmake .. -DANDROID_STL="c++_static" \
 	-DANDROID_NATIVE_API_LEVEL="$NATIVE_API_LEVEL" \
@@ -25,10 +36,10 @@ cmake .. -DANDROID_STL="c++_static" \
 	-DCMAKE_C_FLAGS_RELEASE="$CFLAGS" \
 	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake" \
 	-DFT_DISABLE_BZIP2=TRUE \
-	-DFT_DISABLE_HARFBUZZ=TRUE \
 	-DFT_DISABLE_BROTLI=TRUE \
 	-DFT_REQUIRE_PNG=TRUE \
 	-DFT_REQUIRE_ZLIB=TRUE \
+	$HARFBUZZ_FLAGS \
 	-DPNG_LIBRARY="$ANDR_ROOT/output/libpng/lib/$TARGET_ABI/libpng.a" \
 	-DPNG_PNG_INCLUDE_DIR="$ANDR_ROOT/output/libpng/include"
 
