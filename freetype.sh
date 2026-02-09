@@ -24,7 +24,7 @@ else
 		-DFT_REQUIRE_HARFBUZZ=TRUE \
 		-DFT_DYNAMIC_HARFBUZZ=FALSE \
 		-DHarfBuzz_LIBRARY=$ANDR_ROOT/output/harfbuzz/lib/$TARGET_ABI/libharfbuzz.a \
-		-DHarfBuzz_INCLUDE_DIR=$ANDR_ROOT/output/harfbuzz/include"
+		-DHarfBuzz_INCLUDE_DIR=$ANDR_ROOT/output/harfbuzz/include/harfbuzz"
 fi
 
 cmake .. -DANDROID_STL="c++_static" \
