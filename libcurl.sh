@@ -18,7 +18,7 @@ INCLUDE_DIRS="-I$ANDR_ROOT/output/openssl/include -I$ANDR_ROOT/output/nghttp2/in
 LIBRARY_DIRS="-L$ANDR_ROOT/output/openssl/lib/$TARGET_ABI -L$ANDR_ROOT/output/nghttp2/lib/$TARGET_ABI"
 
 CFLAGS="$INCLUDE_DIRS $LIBRARY_DIRS $CFLAGS" \
-./configure --host=$TARGET \
+./configure --host="$TARGET" \
 	--with-openssl \
 	--with-nghttp2 \
 	--prefix=/ --disable-shared --enable-static \

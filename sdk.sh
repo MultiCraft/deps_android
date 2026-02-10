@@ -41,9 +41,9 @@ case "$ARCH" in
 esac
 
 export API=23
-export CFLAGS="-Ofast -flto -fPIC -D__ANDROID_MIN_SDK_VERSION__=$API"
+export CFLAGS="-Ofast -flto -fPIC -fvisibility=hidden -D__ANDROID_MIN_SDK_VERSION__=$API"
 export CFLAGS_NO_FAST="-O3 -fPIC -D__ANDROID_MIN_SDK_VERSION__=$API"
-export CXXFLAGS="$CFLAGS -fexceptions -frtti"
+export CXXFLAGS="$CFLAGS -fvisibility-inlines-hidden -fexceptions -frtti"
 export NATIVE_API_LEVEL="android-$API"
 
 echo "Configured for $TARGET_ABI"
@@ -64,7 +64,7 @@ esac
 export CC=$TOOLCHAIN/bin/$TARGET$API-clang
 export CXX=$TOOLCHAIN/bin/$TARGET$API-clang++
 export AR=$TOOLCHAIN/bin/llvm-ar
-export LD=$TOOLCHAIN/bin/ld
+#export LD=$TOOLCHAIN/bin/ld
 export RANLIB=$TOOLCHAIN/bin/llvm-ranlib
 export STRIP=$TOOLCHAIN/bin/llvm-strip
 

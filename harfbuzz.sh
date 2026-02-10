@@ -21,6 +21,7 @@ cmake .. -DANDROID_STL="c++_static" \
 	-DBUILD_SHARED_LIBS=FALSE \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_C_FLAGS_RELEASE="$CFLAGS" \
+	-DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
 	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake" \
 	-DFREETYPE_LIBRARY="$ANDR_ROOT/output/freetype/lib/$TARGET_ABI/libfreetype.a $ANDR_ROOT/output/libpng/lib/$TARGET_ABI/libpng.a" \
 	-DFREETYPE_INCLUDE_DIRS="$ANDR_ROOT/output/freetype/include" \
