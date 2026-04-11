@@ -1,0 +1,72 @@
+name: Build Android Deps
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      NDK_VERSION: 29.0.14206865
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install -y build-essential libc6-dev libc6-dev:i386 \
+          gcc-multilib g++-multilib \
+          dos2unix
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v4
+
+      - name: Install specific NDK
+        run: |
+          sdkmanager "ndk;$NDK_VERSION"
+          echo "NDK_PATH=$ANDROID_HOME/ndk/$NDK_VERSION" >> $GITHUB_ENV
+          echo "ANDROID_NDK_ROOT=$ANDROID_HOME/ndk/$NDK_VERSION" >> $GITHUB_ENV
+          echo "ndk.dir=$ANDROID_HOME/ndk/$NDK_VERSION" > local.properties
+
+      - name: Run build scripts
+        run: |
+          chmod +x *.sh
+          ./Start.sh
+
+      - name: Create archive
+        run: |
+          if [ ! -d "output" ]; then
+            echo "output folder not found!"
+            exit 1
+          fi
+
+          cd output
+          zip -r ../deps_android.zip .
+          cd ..
+
+      - name: Generate version
+        id: version
+        run: |
+          DATE=$(date +'%d%m%Y')
+          COUNT=$(gh release list --limit 1000 \
+            | grep "$DATE" \
+            | wc -l)
+          BUILD_NUM=$((COUNT + 1))
+          echo "version=${DATE}-${BUILD_NUM}" >> $GITHUB_OUTPUT
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: ${{ steps.version.outputs.version }}
+          files: deps_android.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
