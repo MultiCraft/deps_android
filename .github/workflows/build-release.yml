@@ -1,0 +1,56 @@
+name: Build Android Deps
+
+env:
+  NDK_VERSION: 29.0.14206865
+
+on:
+  push:
+	branches:
+	  - *
+
+jobs:
+  build:
+	runs-on: ubuntu-latest
+
+	steps:
+	  - name: Checkout
+		uses: actions/checkout@v4
+
+	  # 📦 Установка Android SDK + NDK конкретной версии
+	  - name: Setup Android SDK
+		uses: android-actions/setup-android@v3
+
+	  - name: Install specific NDK
+		run: |
+		  sdkmanager "ndk;$NDK_VERSION"
+		  echo "NDK_HOME=$ANDROID_HOME/ndk/$NDK_VERSION" >> $GITHUB_ENV
+
+	  - name: Make scripts executable
+		run: |
+		  chmod +x *.sh
+
+	  - name: Run build scripts
+		run: |
+		  ./sdk.sh
+		  ./Start.sh
+
+	  - name: Create archive
+		run: |
+		  cd output
+		  zip -r ../deps_android.zip .
+		  cd ..
+
+	  - name: Generate version
+		id: version
+		run: |
+		  DATE=$(date +'%Y-%m-%d')
+		  echo "version=${DATE}-build-${{ github.run_number }}" >> $GITHUB_OUTPUT
+
+	  - name: Create Release
+		uses: softprops/action-gh-release@v2
+		with:
+		  tag_name: ${{ steps.version.outputs.version }}
+		  name: deps_android ${{ steps.version.outputs.version }}
+		  files: deps_android.zip
+		env:
+		  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
