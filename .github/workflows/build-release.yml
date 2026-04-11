@@ -20,18 +20,18 @@ jobs:
         run: |
           sudo dpkg --add-architecture i386
           sudo apt-get update
-          sudo apt-get install -y build-essential libc6-dev libc6-dev:i386
+          sudo apt-get install -y build-essential libc6-dev libc6-dev:i386 \
+          gcc g++ \
+          libgcc-s1 libstdc++6 \
+          gcc-multilib g++-multilib
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
 
       - name: Install specific NDK
         run: |
           sdkmanager "ndk;$NDK_VERSION"
           echo "NDK_PATH=$ANDROID_HOME/ndk/$NDK_VERSION" >> $GITHUB_ENV
-
-      - name: Write NDK to local.properties
-        run: |
           echo "ndk.dir=$ANDROID_HOME/ndk/$NDK_VERSION" >> local.properties
 
       - name: Make scripts executable
