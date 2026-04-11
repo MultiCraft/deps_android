@@ -14,8 +14,7 @@ cd vorbis-src
 $ANDROID_NDK/ndk-build -j \
 	APP_ABI="$TARGET_ABI" \
 	APP_PLATFORM=android-"$API" \
-	APP_CFLAGS="$CFLAGS" \
-	APP_STL="c++_static"
+	APP_CFLAGS="$CFLAGS"
 
 # update headers
 rm -rf ../../output/vorbis/include/
