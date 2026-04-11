@@ -56,13 +56,19 @@ jobs:
         id: version
         run: |
           DATE=$(date +'%Y%m%d')
-          echo "version=${DATE}-${{ github.run_number }}" >> $GITHUB_OUTPUT
+          COUNT=$(gh release list --limit 1000 \
+            | grep "$DATE" \
+            | wc -l)
+          BUILD_NUM=$((COUNT + 1))
+          echo "version=${DATE}-${BUILD_NUM}" >> $GITHUB_OUTPUT
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.version.outputs.version }}
-          name: deps_android ${{ steps.version.outputs.version }}
+          name: ${{ steps.version.outputs.version }}
           files: deps_android.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
