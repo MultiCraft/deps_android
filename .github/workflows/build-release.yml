@@ -3,7 +3,7 @@ name: Build Android Deps
 on:
   push:
     branches:
-      - '*'
+      - main
 
 jobs:
   build:
@@ -21,7 +21,6 @@ jobs:
           sudo dpkg --add-architecture i386
           sudo apt-get update
           sudo apt-get install -y build-essential libc6-dev libc6-dev:i386 \
-          gcc g++ \
           gcc-multilib g++-multilib \
           dos2unix
 
@@ -35,11 +34,10 @@ jobs:
           echo "ANDROID_NDK_ROOT=$ANDROID_HOME/ndk/$NDK_VERSION" >> $GITHUB_ENV
           echo "ndk.dir=$ANDROID_HOME/ndk/$NDK_VERSION" > local.properties
 
-      - name: Make scripts executable
-        run: chmod +x *.sh
-
       - name: Run build scripts
-        run: ./Start.sh
+        run: |
+          chmod +x *.sh
+          ./Start.sh
 
       - name: Create archive
         run: |
@@ -55,7 +53,7 @@ jobs:
       - name: Generate version
         id: version
         run: |
-          DATE=$(date +'%Y%m%d')
+          DATE=$(date +'%d%m%Y')
           COUNT=$(gh release list --limit 1000 \
             | grep "$DATE" \
             | wc -l)
