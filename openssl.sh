@@ -15,9 +15,9 @@ fi
 
 cd openssl-src
 
-export PATH=$TOOLCHAIN/bin:$PATH
+PATH=$TOOLCHAIN/bin:$PATH
 dos2unix Configure
-./Configure $TARGET_NAME no-tests no-shared -U__ANDROID_API__ -D__ANDROID_API__=$API --prefix=$PWD/build CC=$CC AR=$AR RANLIB=$RANLIB
+./Configure $TARGET_NAME no-tests no-shared -U__ANDROID_API__ -D__ANDROID_API__=$API
 make -j
 
 # update headers

@@ -32,7 +32,8 @@ jobs:
         run: |
           sdkmanager "ndk;$NDK_VERSION"
           echo "NDK_PATH=$ANDROID_HOME/ndk/$NDK_VERSION" >> $GITHUB_ENV
-          echo "ndk.dir=$ANDROID_HOME/ndk/$NDK_VERSION" >> local.properties
+		  echo "ANDROID_NDK_ROOT=$ANDROID_HOME/ndk/$NDK_VERSION" >> $GITHUB_ENV
+          echo "ndk.dir=$ANDROID_HOME/ndk/$NDK_VERSION" > local.properties
 
       - name: Make scripts executable
         run: chmod +x *.sh
