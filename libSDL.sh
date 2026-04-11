@@ -8,8 +8,8 @@ mkdir -p output/libSDL/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d libSDL-src ]; then
-	#wget -nc -O libsdl-$SDL_VERSION.tar.gz https://github.com/libsdl-org/SDL/archive/release-$SDL_VERSION.tar.gz
-	wget -nc -O libsdl-$SDL_VERSION.tar.gz https://github.com/MoNTE48/SDL/archive/refs/heads/AndroidRPC.tar.gz
+	#wget -nc -O libsdl-$SDL_VERSION.tar.gz https://github.com/libsdl-org/SDL/archive/release-$SDL_VERSION.tar.gz || true
+	wget -nc -O libsdl-$SDL_VERSION.tar.gz https://github.com/MoNTE48/SDL/archive/refs/heads/AndroidRPC.tar.gz || true
 	tar -xzf libsdl-$SDL_VERSION.tar.gz
 	#mv SDL-release-$SDL_VERSION libSDL-src
 	mv SDL-AndroidRPC libSDL-src

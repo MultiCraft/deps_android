@@ -7,7 +7,7 @@ mkdir -p output/libpng/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d libpng-src ]; then
-	wget -nc -O libpng-$PNG_VERSION.tar.gz https://github.com/pnggroup/libpng/archive/refs/tags/v$PNG_VERSION.tar.gz
+	wget -nc -O libpng-$PNG_VERSION.tar.gz https://github.com/pnggroup/libpng/archive/refs/tags/v$PNG_VERSION.tar.gz || true
 	tar -xaf libpng-$PNG_VERSION.tar.gz
 	mv libpng-$PNG_VERSION libpng-src
 fi

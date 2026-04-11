@@ -8,7 +8,7 @@ mkdir -p output/leveldb/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d leveldb-src ]; then
-	wget -nc -O leveldb-$LEVELDB_VERSION.tar.gz https://github.com/google/leveldb/archive/refs/tags/$LEVELDB_VERSION.tar.gz
+	wget -nc -O leveldb-$LEVELDB_VERSION.tar.gz https://github.com/google/leveldb/archive/refs/tags/$LEVELDB_VERSION.tar.gz || true
 	tar -xzf leveldb-$LEVELDB_VERSION.tar.gz
 	mv leveldb-$LEVELDB_VERSION leveldb-src
 	mkdir leveldb-src/build
