@@ -16,22 +16,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libc6-dev
+
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
       - name: Install specific NDK
         run: |
           sdkmanager "ndk;$NDK_VERSION"
-          echo "NDK_HOME=$ANDROID_HOME/ndk/$NDK_VERSION" >> $GITHUB_ENV
-          echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/$NDK_VERSION" >> $GITHUB_ENV
+          echo "NDK_PATH=$ANDROID_HOME/ndk/$NDK_VERSION" >> $GITHUB_ENV
+
+      - name: Write NDK to local.properties
+        run: |
+          echo "ndk.dir=$ANDROID_HOME/ndk/$NDK_VERSION" >> local.properties
 
       - name: Make scripts executable
         run: chmod +x *.sh
 
       - name: Run build scripts
-        run: |
-          ./sdk.sh
-          ./Start.sh
+        run: ./Start.sh
 
       - name: Create archive
         run: |
@@ -41,7 +47,7 @@ jobs:
           fi
 
           cd output
-          zip -r ../deps_android.zip .
+          zip -r1 ../deps_android.zip .
           cd ..
 
       - name: Generate version
