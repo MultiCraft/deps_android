@@ -52,6 +52,8 @@ fi
 ./freetype.sh bootstrap
 ./harfbuzz.sh
 ./freetype.sh
+./pixman.sh
+./cairo.sh
 ./libSDL.sh
 ./openssl.sh
 ./irrlicht.sh
