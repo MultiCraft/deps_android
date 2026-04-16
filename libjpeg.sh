@@ -7,7 +7,7 @@ mkdir -p output/libjpeg/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d libjpeg-src ]; then
-	wget -nc -O libjpeg-$JPEG_VERSION.tar.gz https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/tags/$JPEG_VERSION.tar.gz
+	wget -nc -O libjpeg-$JPEG_VERSION.tar.gz https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/tags/$JPEG_VERSION.tar.gz || true
 	tar -xaf libjpeg-$JPEG_VERSION.tar.gz
 	mv libjpeg-turbo-$JPEG_VERSION libjpeg-src
 	mkdir libjpeg-src/build
@@ -15,7 +15,7 @@ fi
 
 cd libjpeg-src/build
 
-cmake .. -DANDROID_STL="c++_static" \
+cmake .. \
 	-DANDROID_NATIVE_API_LEVEL="$NATIVE_API_LEVEL" \
 	-DANDROID_ABI="$ANDROID_ABI" \
 	-DANDROID_PLATFORM="$API" \

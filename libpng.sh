@@ -1,13 +1,13 @@
 #!/bin/bash -e
 
 . ./sdk.sh
-PNG_VERSION=1.6.56
+PNG_VERSION=1.6.57
 
 mkdir -p output/libpng/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d libpng-src ]; then
-	wget -nc -O libpng-$PNG_VERSION.tar.gz https://github.com/pnggroup/libpng/archive/refs/tags/v$PNG_VERSION.tar.gz
+	wget -nc -O libpng-$PNG_VERSION.tar.gz https://github.com/pnggroup/libpng/archive/refs/tags/v$PNG_VERSION.tar.gz || true
 	tar -xaf libpng-$PNG_VERSION.tar.gz
 	mv libpng-$PNG_VERSION libpng-src
 fi
@@ -15,7 +15,7 @@ fi
 mkdir -p libpng-src/build
 cd libpng-src/build
 
-cmake .. -DANDROID_STL="c++_static" \
+cmake .. \
 	-DANDROID_NATIVE_API_LEVEL="$NATIVE_API_LEVEL" \
 	-DANDROID_ABI="$ANDROID_ABI" \
 	-DANDROID_PLATFORM="$API" \

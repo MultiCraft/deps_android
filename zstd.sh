@@ -8,7 +8,7 @@ mkdir -p output/zstd/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d zstd-src ]; then
-	wget -nc -O zstd-$ZSTD_VERSION.tar.gz https://github.com/facebook/zstd/archive/refs/tags/v$ZSTD_VERSION.tar.gz
+	wget -nc -O zstd-$ZSTD_VERSION.tar.gz https://github.com/facebook/zstd/archive/refs/tags/v$ZSTD_VERSION.tar.gz || true
 	tar -xaf zstd-$ZSTD_VERSION.tar.gz
 	mv zstd-$ZSTD_VERSION zstd-src
 fi
@@ -16,7 +16,7 @@ fi
 mkdir -p zstd-src/build/cmake/builddir
 cd zstd-src/build/cmake/builddir
 
-cmake .. -DANDROID_STL="c++_static" \
+cmake .. \
 	-DANDROID_NATIVE_API_LEVEL="$NATIVE_API_LEVEL" \
 	-DANDROID_ABI="$ANDROID_ABI" \
 	-DANDROID_PLATFORM="$API" \

@@ -8,7 +8,7 @@ mkdir -p output/luajit/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d luajit-src ]; then
-	wget -nc -O luajit-$LUAJIT_VERSION.tar.gz https://github.com/LuaJIT/LuaJIT/archive/v$LUAJIT_VERSION.tar.gz
+	wget -nc -O luajit-$LUAJIT_VERSION.tar.gz https://github.com/LuaJIT/LuaJIT/archive/v$LUAJIT_VERSION.tar.gz || true
 	tar -xzf luajit-$LUAJIT_VERSION.tar.gz
 	mv LuaJIT-$LUAJIT_VERSION luajit-src
 fi
