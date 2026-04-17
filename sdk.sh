@@ -22,19 +22,25 @@ case "$ARCH" in
 		export TARGET_ABI=armeabi-v7a
 		export TARGET_NAME=android-arm
 		export ANDROID_ABI="$TARGET_ABI with NEON"
-		export TARGET=armv7a-linux-androideabi ;;
+		export TARGET=armv7a-linux-androideabi
+		export TARGET_CPU_FAMILY=arm
+		export TARGET_CPU=armv7a ;;
 	"arm64")
 		### toolchain config for ARM64
 		export TARGET_ABI=arm64-v8a
 		export TARGET_NAME=android-arm64
 		export ANDROID_ABI=$TARGET_ABI
-		export TARGET=aarch64-linux-android ;;
+		export TARGET=aarch64-linux-android
+		export TARGET_CPU_FAMILY=aarch64
+		export TARGET_CPU=armv8 ;;
 	"x86_64")
 		### toolchain config for x86_64
 		export TARGET_ABI=x86_64
 		export TARGET_NAME=android-x86_64
 		export ANDROID_ABI=$TARGET_ABI
-		export TARGET=x86_64-linux-android ;;
+		export TARGET=x86_64-linux-android
+		export TARGET_CPU_FAMILY=x86_64
+		export TARGET_CPU=x86_64 ;;
 	*)
 		echo "Don't ask to use $ARCH"
 		exit 1 ;;

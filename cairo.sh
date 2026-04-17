@@ -58,6 +58,7 @@ EOF
 
 meson setup build \
 	--cross-file "$CROSS_FILE" \
+	--wrap-mode=nodownload \
 	--default-library=static \
 	--buildtype=release \
 	-Dprefix=/ \
