@@ -65,7 +65,8 @@ meson setup build \
 	-Dprefix=/ \
 	-Dgtk=disabled \
 	-Dtests=disabled \
-	-Ddemos=disabled
+	-Ddemos=disabled \
+	-Dcpu-features-path="$ANDROID_NDK/sources/android/cpufeatures"
 
 ninja -C build -j$(nproc)
 
