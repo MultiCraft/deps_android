@@ -18,6 +18,47 @@ PNG_PREFIX="$ANDR_ROOT/output/libpng"
 PIXMAN_PREFIX="$ANDR_ROOT/output/pixman"
 CROSS_FILE="android-$TARGET_ABI.cross"
 
+mkdir -p pkgconfig
+
+cat > pkgconfig/freetype2.pc << EOF
+prefix=$ANDR_ROOT/output/freetype
+exec_prefix=\${prefix}
+libdir=\${prefix}/lib/$TARGET_ABI
+includedir=\${prefix}/include
+
+Name: FreeType 2
+Description:
+Version: 26.x
+Libs: -L\${libdir} -lfreetype
+Cflags: -I\${includedir}
+EOF
+
+cat > pkgconfig/pixman-1.pc << EOF
+prefix=$ANDR_ROOT/output/pixman
+exec_prefix=\${prefix}
+libdir=\${prefix}/lib/$TARGET_ABI
+includedir=\${prefix}/include
+
+Name: Pixman
+Description:
+Version: 0.42.x
+Libs: -L\${libdir} -lpixman
+Cflags: -I\${includedir}
+EOF
+
+cat > pkgconfig/libpng.pc << EOF
+prefix=$ANDR_ROOT/output/libpng
+exec_prefix=\${prefix}
+libdir=\${prefix}/lib/$TARGET_ABI
+includedir=\${prefix}/include
+
+Name: libpng
+Description:
+Version: 1.6.x
+Libs: -L\${libdir} -lpng
+Cflags: -I\${includedir}
+EOF
+
 cat > "$CROSS_FILE" << EOF
 [binaries]
 c = '$CC'
@@ -48,6 +89,7 @@ cpp_link_args = ['-fPIC',
 [properties]
 sys_root = '$TOOLCHAIN/sysroot'
 needs_exe_wrapper = true
+pkg_config_libdir = '$ANDR_ROOT/deps/cairo-src/pkgconfig'
 
 [host_machine]
 system = 'android'

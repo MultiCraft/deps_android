@@ -16,6 +16,21 @@ cd pixman-src
 PNG_PREFIX="$ANDR_ROOT/output/libpng"
 CROSS_FILE="android-$TARGET_ABI.cross"
 
+mkdir -p pkgconfig
+
+cat > pkgconfig/libpng.pc << EOF
+prefix=$ANDR_ROOT/output/libpng
+exec_prefix=\${prefix}
+libdir=\${prefix}/lib/$TARGET_ABI
+includedir=\${prefix}/include
+
+Name: libpng
+Description:
+Version: 1.6.x
+Libs: -L\${libdir} -lpng
+Cflags: -I\${includedir}
+EOF
+
 cat > "$CROSS_FILE" << EOF
 [binaries]
 c = '$CC'
@@ -34,6 +49,7 @@ cpp_link_args = ['-fPIC', '-L${PNG_PREFIX}/lib/${TARGET_ABI}']
 [properties]
 sys_root = '$TOOLCHAIN/sysroot'
 needs_exe_wrapper = true
+pkg_config_libdir = '$ANDR_ROOT/deps/pixman-src/pkgconfig'
 
 [host_machine]
 system = 'android'
