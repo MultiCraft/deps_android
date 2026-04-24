@@ -69,23 +69,23 @@ strip = '$STRIP'
 pkg-config = 'pkg-config'
 
 [built-in options]
-c_args = ['-O3', '-fPIC', '-D__ANDROID_MIN_SDK_VERSION__=$API',
+c_args = ['-Ofast', '-flto', '-fPIC', '-fvisibility=hidden', '-D__ANDROID_MIN_SDK_VERSION__=$API',
 	'-I${FREETYPE_PREFIX}/include', '-I${FREETYPE_PREFIX}/include/freetype2',
 	'-I${PNG_PREFIX}/include',
 	'-I${PIXMAN_PREFIX}/include']
-c_link_args = ['-fPIC',
+c_link_args = ['-flto', '-fPIC', '-Wl,--gc-sections',
 	'-L${FREETYPE_PREFIX}/lib/${TARGET_ABI}',
 	'-L${PNG_PREFIX}/lib/${TARGET_ABI}',
 	'-L${PIXMAN_PREFIX}/lib/${TARGET_ABI}']
-cpp_args = ['-O3', '-fPIC', '-D__ANDROID_MIN_SDK_VERSION__=$API',
+cpp_args = ['-Ofast', '-flto', '-fPIC', '-fvisibility=hidden', '-fvisibility-inlines-hidden', '-D__ANDROID_MIN_SDK_VERSION__=$API',
 	'-I${FREETYPE_PREFIX}/include', '-I${FREETYPE_PREFIX}/include/freetype2',
 	'-I${PNG_PREFIX}/include',
 	'-I${PIXMAN_PREFIX}/include']
-cpp_link_args = ['-fPIC',
+cpp_link_args = ['-flto', '-fPIC', '-Wl,--gc-sections',
 	'-L${FREETYPE_PREFIX}/lib/${TARGET_ABI}',
 	'-L${PNG_PREFIX}/lib/${TARGET_ABI}',
 	'-L${PIXMAN_PREFIX}/lib/${TARGET_ABI}']
-    
+
 [properties]
 sys_root = '$TOOLCHAIN/sysroot'
 needs_exe_wrapper = true

@@ -41,10 +41,15 @@ strip = '$STRIP'
 pkg-config = 'pkg-config'
 
 [built-in options]
-c_args = ['-O3', '-fPIC', '-D__ANDROID_MIN_SDK_VERSION__=$API', '-I${PNG_PREFIX}/include']
-c_link_args = ['-fPIC', '-L${PNG_PREFIX}/lib/${TARGET_ABI}']
-cpp_args = ['-O3', '-fPIC', '-D__ANDROID_MIN_SDK_VERSION__=$API', '-I${PNG_PREFIX}/include']
-cpp_link_args = ['-fPIC', '-L${PNG_PREFIX}/lib/${TARGET_ABI}']
+c_args = ['-Ofast', '-flto', '-fPIC', '-fvisibility=hidden', '-D__ANDROID_MIN_SDK_VERSION__=$API',
+	'-I${PNG_PREFIX}/include']
+c_link_args = ['-flto', '-fPIC', '-Wl,--gc-sections',
+	'-L${PNG_PREFIX}/lib/${TARGET_ABI}']
+cpp_args = ['-Ofast', '-flto', '-fPIC', '-fvisibility=hidden', '-fvisibility-inlines-hidden', '-D__ANDROID_MIN_SDK_VERSION__=$API',
+	'-I${PNG_PREFIX}/include']
+cpp_link_args = [
+	'-flto', '-fPIC', '-Wl,--gc-sections',
+	'-L${PNG_PREFIX}/lib/${TARGET_ABI}']
 
 [properties]
 sys_root = '$TOOLCHAIN/sysroot'
