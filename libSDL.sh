@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-SDL_VERSION=3.4.0
+SDL_VERSION=3.4.8
 
 . ./sdk.sh
 
@@ -9,10 +9,10 @@ mkdir -p deps; cd deps
 
 if [ ! -d libSDL-src ]; then
 	#wget -nc -O libsdl-$SDL_VERSION.tar.gz https://github.com/libsdl-org/SDL/archive/release-$SDL_VERSION.tar.gz || true
-	wget -nc -O libsdl-$SDL_VERSION.tar.gz https://github.com/MoNTE48/SDL/archive/refs/heads/AndroidRPC.tar.gz || true
+	wget -nc -O libsdl-$SDL_VERSION.tar.gz https://github.com/MoNTE48/SDL/archive/refs/heads/AndroidRPC2.tar.gz || true
 	tar -xzf libsdl-$SDL_VERSION.tar.gz
 	#mv SDL-release-$SDL_VERSION libSDL-src
-	mv SDL-AndroidRPC libSDL-src
+	mv SDL-AndroidRPC2 libSDL-src
 fi
 
 cd libSDL-src
@@ -24,7 +24,7 @@ cmake .. -DANDROID_STL="c++_static" \
 	-DANDROID_ABI="$ANDROID_ABI" \
 	-DANDROID_PLATFORM="$API" \
 	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_C_FLAGS="$CFLAGS -DSDL_ANDROID_GAMEPAD_AS_RPC=1" \
+	-DCMAKE_C_FLAGS="$CFLAGS" \
 	-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
 	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake" \
 	-DSDL_STATIC=ON \
