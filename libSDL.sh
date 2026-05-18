@@ -9,10 +9,10 @@ mkdir -p deps; cd deps
 
 if [ ! -d libSDL-src ]; then
 	#wget -nc -O libsdl-$SDL_VERSION.tar.gz https://github.com/libsdl-org/SDL/archive/release-$SDL_VERSION.tar.gz || true
-	wget -nc -O libsdl-$SDL_VERSION.tar.gz https://github.com/MoNTE48/SDL/archive/refs/heads/AndroidRPC2.tar.gz || true
+	wget -nc -O libsdl-$SDL_VERSION.tar.gz https://github.com/MoNTE48/SDL/archive/refs/heads/AndroidRPC3.tar.gz || true
 	tar -xzf libsdl-$SDL_VERSION.tar.gz
 	#mv SDL-release-$SDL_VERSION libSDL-src
-	mv SDL-AndroidRPC2 libSDL-src
+	mv SDL-AndroidRPC3 libSDL-src
 fi
 
 cd libSDL-src
