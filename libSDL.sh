@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-SDL_VERSION=3.4.8
+SDL_VERSION=release-3.4.x
 
 . ./sdk.sh
 
@@ -8,11 +8,9 @@ mkdir -p output/libSDL/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d libSDL-src ]; then
-	#wget -nc -O libsdl-$SDL_VERSION.tar.gz https://github.com/libsdl-org/SDL/archive/release-$SDL_VERSION.tar.gz || true
-	wget -nc -O libsdl-$SDL_VERSION.tar.gz https://github.com/MoNTE48/SDL/archive/refs/heads/AndroidRPC3.tar.gz || true
-	tar -xzf libsdl-$SDL_VERSION.tar.gz
-	#mv SDL-release-$SDL_VERSION libSDL-src
-	mv SDL-AndroidRPC3 libSDL-src
+	git clone -b "$SDL_VERSION" https://github.com/libsdl-org/SDL libSDL-src
+	git -C libSDL-src fetch origin pull/14962/head
+	git -C libSDL-src cherry-pick -n 55bf7680
 fi
 
 cd libSDL-src
