@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-SDL_VERSION=release-3.4.x
+SDL_VERSION=release-3.4.10
 
 . ./sdk.sh
 
@@ -10,7 +10,7 @@ mkdir -p deps; cd deps
 if [ ! -d libSDL-src ]; then
 	git clone -b "$SDL_VERSION" https://github.com/libsdl-org/SDL libSDL-src
 	git -C libSDL-src fetch origin pull/14962/head
-	git -C libSDL-src cherry-pick -n 55bf7680
+	git -C libSDL-src cherry-pick -n 2f63063
 fi
 
 cd libSDL-src
