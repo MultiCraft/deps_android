@@ -24,7 +24,8 @@ case "$ARCH" in
 		export ANDROID_ABI="$TARGET_ABI with NEON"
 		export TARGET=armv7a-linux-androideabi
 		export TARGET_CPU_FAMILY=arm
-		export TARGET_CPU=armv7a ;;
+		export TARGET_CPU=armv7a
+		export ARCH_CFLAGS="-mfpu=neon" ;;
 	"arm64")
 		### toolchain config for ARM64
 		export TARGET_ABI=arm64-v8a
@@ -32,7 +33,8 @@ case "$ARCH" in
 		export ANDROID_ABI=$TARGET_ABI
 		export TARGET=aarch64-linux-android
 		export TARGET_CPU_FAMILY=aarch64
-		export TARGET_CPU=armv8 ;;
+		export TARGET_CPU=armv8
+		export ARCH_CFLAGS="" ;;
 	"x86_64")
 		### toolchain config for x86_64
 		export TARGET_ABI=x86_64
@@ -40,15 +42,16 @@ case "$ARCH" in
 		export ANDROID_ABI=$TARGET_ABI
 		export TARGET=x86_64-linux-android
 		export TARGET_CPU_FAMILY=x86_64
-		export TARGET_CPU=x86_64 ;;
+		export TARGET_CPU=x86_64
+		export ARCH_CFLAGS="" ;;
 	*)
 		echo "Don't ask to use $ARCH"
 		exit 1 ;;
 esac
 
 export API=23
-export CFLAGS="-Ofast -flto -fPIC -fvisibility=hidden -D__ANDROID_MIN_SDK_VERSION__=$API -Wno-deprecated-ofast"
-export CFLAGS_NO_FAST="-O3 -fPIC -D__ANDROID_MIN_SDK_VERSION__=$API"
+export CFLAGS="-Ofast -flto -fPIC -fvisibility=hidden -ffunction-sections -fdata-sections -D__ANDROID_MIN_SDK_VERSION__=$API -Wno-deprecated-ofast $ARCH_CFLAGS"
+export CFLAGS_NO_FAST="-O3 -fPIC -ffunction-sections -fdata-sections -D__ANDROID_MIN_SDK_VERSION__=$API $ARCH_CFLAGS"
 export CXXFLAGS="$CFLAGS -fvisibility-inlines-hidden -fexceptions -frtti"
 export NATIVE_API_LEVEL="android-$API"
 
