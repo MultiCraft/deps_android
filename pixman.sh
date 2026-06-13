@@ -14,57 +14,13 @@ fi
 cd pixman-src
 
 PNG_PREFIX="$ANDR_ROOT/output/libpng"
-CROSS_FILE="android-$TARGET_ABI.cross"
 
 mkdir -p pkgconfig
-
-cat > pkgconfig/libpng.pc << EOF
-prefix=$ANDR_ROOT/output/libpng
-exec_prefix=\${prefix}
-libdir=\${prefix}/lib/$TARGET_ABI
-includedir=\${prefix}/include
-
-Name: libpng
-Description:
-Version: 1.6.x
-Libs: -L\${libdir} -lpng
-Cflags: -I\${includedir}
-EOF
-
-cat > "$CROSS_FILE" << EOF
-[binaries]
-c = '$CC'
-cpp = '$CXX'
-ar = '$AR'
-ranlib = '$RANLIB'
-strip = '$STRIP'
-pkg-config = 'pkg-config'
-
-[built-in options]
-c_args = ['-Ofast', '-flto', '-fPIC', '-fvisibility=hidden', '-D__ANDROID_MIN_SDK_VERSION__=$API',
-	'-I${PNG_PREFIX}/include']
-c_link_args = ['-flto', '-fPIC', '-Wl,--gc-sections',
-	'-L${PNG_PREFIX}/lib/${TARGET_ABI}']
-cpp_args = ['-Ofast', '-flto', '-fPIC', '-fvisibility=hidden', '-fvisibility-inlines-hidden', '-D__ANDROID_MIN_SDK_VERSION__=$API',
-	'-I${PNG_PREFIX}/include']
-cpp_link_args = [
-	'-flto', '-fPIC', '-Wl,--gc-sections',
-	'-L${PNG_PREFIX}/lib/${TARGET_ABI}']
-
-[properties]
-sys_root = '$TOOLCHAIN/sysroot'
-needs_exe_wrapper = true
-pkg_config_libdir = '$ANDR_ROOT/deps/pixman-src/pkgconfig'
-
-[host_machine]
-system = 'android'
-cpu_family = '$TARGET_CPU_FAMILY'
-cpu = '$TARGET_CPU'
-endian = 'little'
-EOF
+write_pc_file "libpng" "$PNG_PREFIX" "png" "pkgconfig/libpng.pc"
+write_meson_cross_file "android-$TARGET_ABI.cross" "-I${PNG_PREFIX}/include" "-L${PNG_PREFIX}/lib/${TARGET_ABI}"
 
 meson setup build \
-	--cross-file "$CROSS_FILE" \
+	--cross-file "android-$TARGET_ABI.cross" \
 	--default-library=static \
 	--buildtype=release \
 	-Dprefix=/ \

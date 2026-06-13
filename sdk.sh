@@ -76,3 +76,61 @@ export STRIP=$TOOLCHAIN/bin/llvm-strip
 
 export ANDR_ROOT=$(pwd)
 export OUTPUT_PATH="$ANDR_ROOT/output"
+
+# Convert a space-separated flag list into a Meson array literal, e.g. "['-a', '-b']"
+to_meson_list() {
+	local out="[" first=1 flag
+	for flag in $1; do
+		[ $first -eq 1 ] && first=0 || out+=", "
+		out+="'$flag'"
+	done
+	echo "$out]"
+}
+
+# Generate a minimal pkg-config file pointing at an already-built dependency
+# write_pc_file <Name> <prefix> <libname> <out_file>
+write_pc_file() {
+	cat > "$4" << EOF
+prefix=$2
+exec_prefix=\${prefix}
+libdir=\${prefix}/lib/$TARGET_ABI
+includedir=\${prefix}/include
+
+Name: $1
+Description:
+Version: 999
+Libs: -L\${libdir} -l$3
+Cflags: -I\${includedir}
+EOF
+}
+
+# Generate a Meson cross file for the current target
+# write_meson_cross_file <out_file> <extra include flags> <extra lib dirs>
+write_meson_cross_file() {
+	cat > "$1" << EOF
+[binaries]
+c = '$CC'
+cpp = '$CXX'
+ar = '$AR'
+ranlib = '$RANLIB'
+strip = '$STRIP'
+pkg-config = 'pkg-config'
+
+[built-in options]
+c_args = $(to_meson_list "$CFLAGS $2")
+c_link_args = $(to_meson_list "-flto $3")
+cpp_args = $(to_meson_list "$CXXFLAGS $2")
+cpp_link_args = $(to_meson_list "-flto $3")
+
+[properties]
+sys_root = '$TOOLCHAIN/sysroot'
+needs_exe_wrapper = true
+pkg_config_libdir = '$(pwd)/pkgconfig'
+
+[host_machine]
+system = 'android'
+cpu_family = '$TARGET_CPU_FAMILY'
+cpu = '$TARGET_CPU'
+endian = 'little'
+EOF
+}
