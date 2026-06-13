@@ -29,7 +29,7 @@ cmake --build . -j
 make install -s
 
 # update headers
-rm -rf ../../../../libjpeg/include
+rm -rf ../../../output/libjpeg/include
 cp -r include ../../../output/libjpeg/include
 # update lib
 rm -rf ../../../output/libjpeg/lib/$TARGET_ABI/libjpeg.a

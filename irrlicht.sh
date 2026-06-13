@@ -24,7 +24,7 @@ $ANDROID_NDK/ndk-build -j \
 rm -rf ../../../../../output/irrlicht/include
 cp -r ../../../include ../../../../../output/irrlicht/include
 # update lib
-rm -rf ../../../../../../../Irrlicht/lib/$TARGET_ABI/libIrrlicht.a
+rm -rf ../../../../../output/irrlicht/lib/$TARGET_ABI/libIrrlicht.a
 cp ../../../lib/Android-SDL/$TARGET_ABI/libIrrlicht.a ../../../../../output/irrlicht/lib/$TARGET_ABI/libIrrlicht.a
 # update shaders
 rm -rf ../../../../../output/irrlicht/shaders
