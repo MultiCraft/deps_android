@@ -4,6 +4,9 @@ HARFBUZZ_VERSION=14.2.1
 
 . ./sdk.sh
 
+# HarfBuzz doesn't use C++ exceptions/RTTI
+CXXFLAGS="$CFLAGS -fvisibility-inlines-hidden -fno-exceptions -fno-rtti"
+
 mkdir -p output/harfbuzz/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
