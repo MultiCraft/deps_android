@@ -5,8 +5,10 @@
 mkdir -p output/irrlicht/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
-[ ! -d irrlicht-src ] && \
-	git clone --depth 1 -b SDL https://github.com/MoNTE48/Irrlicht irrlicht-src
+if [ ! -d irrlicht-src ]; then
+	git clone -b SDL https://github.com/MoNTE48/Irrlicht irrlicht-src
+	git -C irrlicht-src checkout 335faf92b
+fi
 
 cd irrlicht-src/source/Irrlicht/Android-SDL
 

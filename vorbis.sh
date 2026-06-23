@@ -5,9 +5,8 @@
 mkdir -p output/vorbis/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
-if [ ! -d vorbis-src ]; then
+[ ! -d vorbis-src ] && \
 	git clone https://github.com/MoNTE48/libvorbis-android vorbis-src
-fi
 
 cd vorbis-src
 
