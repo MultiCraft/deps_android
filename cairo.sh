@@ -47,7 +47,7 @@ meson setup build \
 	-Dsymbol-lookup=disabled \
 	-Dgtk_doc=false
 
-ninja -C build -j$(nproc)
+ninja -C build
 
 # update headers
 rm -rf ../../output/cairo/include

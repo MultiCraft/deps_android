@@ -2,7 +2,7 @@
 
 ZSTD_VERSION=1.5.7
 
-. sdk.sh
+. ./sdk.sh
 
 mkdir -p output/zstd/lib/$TARGET_ABI
 mkdir -p deps; cd deps

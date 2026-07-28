@@ -45,4 +45,4 @@ cp ../src/*.h ../../../output/harfbuzz/include/harfbuzz
 rm -rf ../../../output/harfbuzz/lib/$TARGET_ABI/libharfbuzz.a
 cp libharfbuzz.a ../../../output/harfbuzz/lib/$TARGET_ABI/libharfbuzz.a
 
-echo "Freetype build successful"
+echo "HarfBuzz build successful"

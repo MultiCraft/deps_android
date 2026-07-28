@@ -29,7 +29,7 @@ meson setup build \
 	-Ddemos=disabled \
 	-Dcpu-features-path="$ANDROID_NDK/sources/android/cpufeatures"
 
-ninja -C build -j$(nproc)
+ninja -C build
 
 # update headers
 rm -rf ../../output/pixman/include
