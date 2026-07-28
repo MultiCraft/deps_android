@@ -9,9 +9,8 @@ OPENAL_VERSION=1.25.1
 mkdir -p output/openal/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
-if [ ! -d openal-src ]; then
-	git clone -b $OPENAL_VERSION --depth 1 https://github.com/kcat/openal-soft openal-src
-fi
+fetch_git openal-src https://github.com/kcat/openal-soft "$OPENAL_VERSION" --depth 1
+mkdir -p openal-src/build
 
 cd openal-src/build
 

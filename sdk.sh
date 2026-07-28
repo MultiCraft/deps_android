@@ -77,6 +77,21 @@ export STRIP=$TOOLCHAIN/bin/llvm-strip
 export ANDR_ROOT=$(pwd)
 export OUTPUT_PATH="$ANDR_ROOT/output"
 
+fetch_git() {
+	local dest=$1 url=$2 branch=$3; shift 3
+	local args=()
+
+	if [ ! -d "$dest" ]; then
+		[ -n "$branch" ] && args+=(-b "$branch")
+		git clone "${args[@]}" "$@" "$url" "$dest"
+		return
+	fi
+
+	git -C "$dest" fetch --depth 1 origin "${branch:-HEAD}"
+	git -C "$dest" reset --hard FETCH_HEAD
+	git -C "$dest" clean -xdff
+}
+
 # Convert a space-separated flag list into a Meson array literal, e.g. "['-a', '-b']"
 to_meson_list() {
 	local out="[" first=1 flag

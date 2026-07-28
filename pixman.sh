@@ -6,10 +6,7 @@ PIXMAN_VERSION=0.46.4
 mkdir -p output/pixman/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
-if [ ! -d pixman-src ]; then
-	git clone -b pixman-$PIXMAN_VERSION --depth 1 https://gitlab.freedesktop.org/pixman/pixman.git pixman-src
-	mkdir pixman-src/build
-fi
+fetch_git pixman-src https://gitlab.freedesktop.org/pixman/pixman.git "pixman-$PIXMAN_VERSION" --depth 1
 
 cd pixman-src
 

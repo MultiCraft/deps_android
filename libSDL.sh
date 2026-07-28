@@ -7,9 +7,7 @@ SDL_VERSION=3.4.10-RPC
 mkdir -p output/libSDL/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
-if [ ! -d libSDL-src ]; then
-	git clone -b "$SDL_VERSION" https://github.com/MoNTE48/SDL libSDL-src
-fi
+fetch_git libSDL-src https://github.com/MoNTE48/SDL "$SDL_VERSION" --depth 1
 
 cd libSDL-src
 

@@ -10,10 +10,8 @@ CXXFLAGS="$CFLAGS -fvisibility-inlines-hidden -fno-exceptions -fno-rtti"
 mkdir -p output/harfbuzz/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
-if [ ! -d harfbuzz-src ]; then
-	git clone -b $HARFBUZZ_VERSION --depth 1 https://github.com/harfbuzz/harfbuzz.git harfbuzz-src
-	mkdir harfbuzz-src/build
-fi
+fetch_git harfbuzz-src https://github.com/harfbuzz/harfbuzz.git "$HARFBUZZ_VERSION" --depth 1
+mkdir -p harfbuzz-src/build
 
 cd harfbuzz-src/build
 

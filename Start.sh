@@ -38,7 +38,7 @@ fi
 # Clean the deps
 mkdir -p deps
 chmod -R u+w deps
-find deps -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} +
+find deps -mindepth 1 -maxdepth 1 -type d ! -exec test -d {}/.git \; -exec rm -rf {} +
 
 # Build libs
 

@@ -6,10 +6,7 @@ CAIRO_VERSION=1.18.4
 mkdir -p output/cairo/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
-if [ ! -d cairo-src ]; then
-	git clone -b $CAIRO_VERSION --depth 1 https://gitlab.freedesktop.org/cairo/cairo.git cairo-src
-	mkdir cairo-src/build
-fi
+fetch_git cairo-src https://gitlab.freedesktop.org/cairo/cairo.git "$CAIRO_VERSION" --depth 1
 
 cd cairo-src
 
