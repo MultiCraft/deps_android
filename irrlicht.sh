@@ -5,7 +5,7 @@
 mkdir -p output/irrlicht/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
-fetch_git irrlicht-src https://github.com/MoNTE48/Irrlicht SDL-stable --depth 1
+fetch_git irrlicht-src https://github.com/MoNTE48/Irrlicht SDL --depth 1
 
 cd irrlicht-src/source/Irrlicht/Android-SDL
 
