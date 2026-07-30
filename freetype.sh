@@ -15,6 +15,16 @@ if [ ! -d freetype-src ]; then
 	mkdir freetype-src/build
 fi
 
+FT_MACROS=freetype-src/include/freetype/config/public-macros.h
+case "$OSTYPE" in
+	darwin*)
+	sed -i '' 's/__attribute__(( visibility( "default" ) ))//' $FT_MACROS
+	;;
+	*)
+	sed -i 's/__attribute__(( visibility( "default" ) ))//' $FT_MACROS
+	;;
+esac
+
 if [ ! -z "$1" ] && [ "$1" = "bootstrap" ]; then
 	cd freetype-src/build-bootstrap
 	HARFBUZZ_FLAGS="-DFT_DISABLE_HARFBUZZ=TRUE"
