@@ -55,7 +55,7 @@ fi
 ./pixman.sh
 ./cairo.sh
 ./libSDL.sh
-./openssl.sh
+./boringssl.sh
 ./irrlicht.sh
 ./openal.sh
 ./nghttp2.sh

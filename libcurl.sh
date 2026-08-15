@@ -14,10 +14,12 @@ fi
 
 cd libcurl-src
 
-INCLUDE_DIRS="-I$ANDR_ROOT/output/openssl/include -I$ANDR_ROOT/output/nghttp2/include"
-LIBRARY_DIRS="-L$ANDR_ROOT/output/openssl/lib/$TARGET_ABI -L$ANDR_ROOT/output/nghttp2/lib/$TARGET_ABI"
+INCLUDE_DIRS="-I$ANDR_ROOT/output/boringssl/include -I$ANDR_ROOT/output/nghttp2/include"
+LIBRARY_DIRS="-L$ANDR_ROOT/output/boringssl/lib/$TARGET_ABI -L$ANDR_ROOT/output/nghttp2/lib/$TARGET_ABI"
 
+# BoringSSL is partly C++, so even the configure probes need the runtime
 CFLAGS="$INCLUDE_DIRS $LIBRARY_DIRS $CFLAGS" \
+LIBS="-lc++" \
 ./configure --host="$TARGET" \
 	--with-openssl \
 	--with-nghttp2 \
