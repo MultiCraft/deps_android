@@ -26,6 +26,10 @@ export DEPOT_TOOLS_UPDATE=0
 [ -d "$ROOT/depot_tools" ] || \
 	git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git "$ROOT/depot_tools"
 
+# Self-update is off, so depot_tools never lays down its own python and the siso hook
+# fails with "python3_bin_reldir.txt not found". This is what the update would have done
+"$ROOT/depot_tools/ensure_bootstrap"
+
 if [ ! -d "$SRC/.git" ]; then
 	git clone --depth 1 https://chromium.googlesource.com/angle/angle "$SRC"
 	( cd "$SRC" && python3 scripts/bootstrap.py )
