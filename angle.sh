@@ -2,9 +2,10 @@
 
 # Chromium's ANGLE, built as libEGL.so and libGLESv2.so for one ABI.
 #
-# The libraries keep the plain names on purpose. Irrlicht links -lEGL -lGLESv2 directly,
-# so a suffixed build would leave its draw calls on the vendor driver while only SDL
-# talked to ANGLE. With the plain names the copies the app ships shadow the system ones.
+# The names carry ANGLE's own suffix. Android keeps the graphics libraries in a linker
+# namespace of their own and ignores an application's copy of libEGL.so or libGLESv2.so,
+# so the plain names never load. The application links against the suffixed ones instead,
+# which puts both its own draw calls and SDL's context on ANGLE.
 #
 # Chromium refuses to target Android from anything but a Linux host, which is why this
 # runs in Actions rather than on a developer machine.
@@ -42,7 +43,7 @@ cd "$SRC"
 
 # gn rejects tab characters inside the argument string, so it is built on one line
 ARGS='target_os="android" target_cpu="'"$CPU"'" is_debug=false is_component_build=false'
-ARGS="$ARGS angle_libs_suffix=\"\" angle_enable_vulkan=true angle_enable_gl=false"
+ARGS="$ARGS angle_libs_suffix=\"_angle\" angle_enable_vulkan=true angle_enable_gl=false"
 ARGS="$ARGS angle_enable_null=false angle_enable_swiftshader=false angle_assert_always_on=false"
 
 gn gen "out/$ABI" --args="$ARGS"
@@ -50,7 +51,7 @@ gn gen "out/$ABI" --args="$ARGS"
 ninja -C "out/$ABI" libEGL libGLESv2
 
 mkdir -p "$ROOT/output/angle/lib/$ABI"
-cp "out/$ABI/libEGL.so" "out/$ABI/libGLESv2.so" "$ROOT/output/angle/lib/$ABI/"
+cp "out/$ABI/libEGL_angle.so" "out/$ABI/libGLESv2_angle.so" "$ROOT/output/angle/lib/$ABI/"
 ls -la "$ROOT/output/angle/lib/$ABI"
 
 echo "ANGLE build successful for $ABI"
