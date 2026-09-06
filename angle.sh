@@ -40,11 +40,12 @@ fi
 
 cd "$SRC"
 
-gn gen "out/$ABI" --args="target_os=\"android\" target_cpu=\"$CPU\" is_debug=false \
-	is_component_build=false angle_libs_suffix=\"\" \
-	angle_enable_vulkan=true angle_enable_gl=false \
-	angle_enable_null=false angle_enable_swiftshader=false \
-	angle_assert_always_on=false"
+# gn rejects tab characters inside the argument string, so it is built on one line
+ARGS='target_os="android" target_cpu="'"$CPU"'" is_debug=false is_component_build=false'
+ARGS="$ARGS angle_libs_suffix=\"\" angle_enable_vulkan=true angle_enable_gl=false"
+ARGS="$ARGS angle_enable_null=false angle_enable_swiftshader=false angle_assert_always_on=false"
+
+gn gen "out/$ABI" --args="$ARGS"
 
 ninja -C "out/$ABI" libEGL libGLESv2
 
