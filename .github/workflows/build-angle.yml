@@ -44,3 +44,39 @@ jobs:
           name: angle-${{ matrix.abi }}
           path: output/angle/lib/${{ matrix.abi }}
           if-no-files-found: error
+
+  sdl:
+    runs-on: ubuntu-latest
+
+    env:
+      NDK_VERSION: 29.0.14206865
+
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [arm64, armv7, x86_64]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v4
+
+      - name: Install specific NDK
+        run: |
+          sdkmanager "ndk;$NDK_VERSION"
+          echo "ndk.dir=$ANDROID_HOME/ndk/$NDK_VERSION" > local.properties
+          echo "arch = ${{ matrix.arch }}" >> local.properties
+
+      - name: Build SDL that opens ANGLE
+        run: |
+          chmod +x *.sh
+          SDL_ANGLE=1 ./libSDL.sh
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: sdl-angle-${{ matrix.arch }}
+          path: output/libSDL
+          if-no-files-found: error

@@ -11,6 +11,18 @@ fetch_git libSDL-src https://github.com/MoNTE48/SDL "$SDL_VERSION" --depth 1
 
 cd libSDL-src
 
+# Android keeps the graphics libraries in a linker namespace of its own and ignores an
+# application's libEGL.so, so ANGLE ships under its own names. SDL opens EGL by a name
+# compiled into it, and that name has to be ANGLE's for the context and the draw calls
+# to end up in the same implementation
+if [ "${SDL_ANGLE:-0}" = "1" ]; then
+	sed -i \
+		-e 's/"libEGL\.so"/"libEGL_angle.so"/g' \
+		-e 's/"libGLESv2\.so"/"libGLESv2_angle.so"/g' \
+		src/video/SDL_egl.c
+	grep -n "libEGL_angle\|libGLESv2_angle" src/video/SDL_egl.c
+fi
+
 mkdir -p build; cd build
 
 cmake .. -DANDROID_STL="c++_static" \
