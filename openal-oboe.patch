@@ -1,0 +1,13 @@
+diff --git a/alc/backends/oboe.cpp b/alc/backends/oboe.cpp
+index 23342683a..1b12d356f 100644
+--- a/alc/backends/oboe.cpp
++++ b/alc/backends/oboe.cpp
+@@ -84,7 +84,7 @@ auto OboePlayback::reset() -> bool
+ {
+     auto builder = oboe::AudioStreamBuilder{};
+     builder.setDirection(oboe::Direction::Output);
+-    builder.setPerformanceMode(oboe::PerformanceMode::LowLatency);
++    builder.setPerformanceMode(oboe::PerformanceMode::None);
+     builder.setUsage(oboe::Usage::Game);
+     /* Don't let Oboe convert. We should be able to handle anything it gives
+      * back.

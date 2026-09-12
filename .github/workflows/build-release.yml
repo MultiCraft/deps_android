@@ -12,6 +12,7 @@ jobs:
 
     env:
       NDK_VERSION: 29.0.14206865
+      CMAKE_VERSION: 4.4.x
 
     steps:
       - name: Checkout
@@ -34,6 +35,11 @@ jobs:
           echo "NDK_PATH=$ANDROID_HOME/ndk/$NDK_VERSION" >> $GITHUB_ENV
           echo "ANDROID_NDK_ROOT=$ANDROID_HOME/ndk/$NDK_VERSION" >> $GITHUB_ENV
           echo "ndk.dir=$ANDROID_HOME/ndk/$NDK_VERSION" > local.properties
+
+      - name: Setup CMake
+        uses: jwlawson/actions-setup-cmake@v2
+        with:
+          cmake-version: ${{ env.CMAKE_VERSION }}
 
       - name: Run build scripts
         run: |

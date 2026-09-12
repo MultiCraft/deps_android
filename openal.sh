@@ -1,15 +1,21 @@
 #!/bin/bash -e
 
-OPENAL_VERSION=1.25.1
+OPENAL_VERSION=1.25.2
 
 . ./sdk.sh
+
+OBOE_INC="$(pwd)/output/oboe/include"
+OBOE_LIB="$(pwd)/output/oboe/lib/$TARGET_ABI/liboboe.a"
+OBOE_PATCH="$(pwd)/openal-oboe.patch"
 
 #export SDL_PATH="$(pwd)/deps/libSDL-src/build/install"
 
 mkdir -p output/openal/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
-fetch_git openal-src https://github.com/kcat/openal-soft "$OPENAL_VERSION" --depth 1
+fetch_git openal-src https://github.com/kcat/openal-soft "$OPENAL_VERSION"
+git -C openal-src cherry-pick --no-commit 681d049
+git -C openal-src apply "$OBOE_PATCH"
 mkdir -p openal-src/build
 
 cd openal-src/build
@@ -20,7 +26,14 @@ cmake .. -DANDROID_STL="c++_static" \
 	-DANDROID_PLATFORM="$API" \
 	-DALSOFT_UTILS=NO \
 	-DALSOFT_EXAMPLES=NO \
-	-DALSOFT_BACKEND_OPENSL=YES \
+	-DALSOFT_BACKEND_OPENSL=NO \
+	-DALSOFT_BACKEND_OBOE=YES \
+	-DALSOFT_REQUIRE_OBOE=YES \
+	-DOBOE_INCLUDE_DIR="$OBOE_INC" \
+	-DOBOE_LIBRARY="$OBOE_LIB" \
+	-DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+	-DALSOFT_INSTALL=NO \
+	-DALSOFT_INSTALL_CONFIG=NO \
 	-DALSOFT_BACKEND_WAVE=NO \
 	-DALSOFT_BACKEND_SDL2=NO \
 	-DALSOFT_BACKEND_SDL3=NO \

@@ -57,6 +57,7 @@ fi
 ./libSDL.sh
 ./boringssl.sh
 ./irrlicht.sh
+./oboe.sh
 ./openal.sh
 ./nghttp2.sh
 ./libcurl.sh
