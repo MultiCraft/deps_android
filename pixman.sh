@@ -20,6 +20,7 @@ meson setup build \
 	--cross-file "android-$TARGET_ABI.cross" \
 	--default-library=static \
 	--buildtype=release \
+	-Db_ndebug=if-release \
 	-Dprefix=/ \
 	-Dgtk=disabled \
 	-Dtests=disabled \

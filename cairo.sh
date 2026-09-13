@@ -28,6 +28,7 @@ meson setup build \
 	--wrap-mode=nodownload \
 	--default-library=static \
 	--buildtype=release \
+	-Db_ndebug=if-release \
 	-Dprefix=/ \
 	-Dfreetype=enabled \
 	-Dpng=enabled \
