@@ -24,7 +24,8 @@ cmake .. \
 	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake" \
 	-DPNG_SHARED=OFF \
 	-DPNG_TESTS=OFF \
-	-DPNG_TOOLS=OFF
+	-DPNG_TOOLS=OFF \
+	-DPNG_ARM_NEON=on
 
 cmake --build . -j
 

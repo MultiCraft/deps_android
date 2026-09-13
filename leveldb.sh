@@ -16,6 +16,7 @@ fi
 
 cd leveldb-src/build
 
+# The NDK's Release -O3 comes after the general flags, so -Ofast is repeated in the Release ones
 cmake .. -DANDROID_STL="c++_static" \
 	-DANDROID_NATIVE_API_LEVEL="$NATIVE_API_LEVEL" \
 	-DANDROID_ABI="$ANDROID_ABI" \
@@ -24,6 +25,8 @@ cmake .. -DANDROID_STL="c++_static" \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_C_FLAGS="$CFLAGS" \
 	-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
+	-DCMAKE_C_FLAGS_RELEASE="-Ofast" \
+	-DCMAKE_CXX_FLAGS_RELEASE="-Ofast" \
 	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake" \
 	-DLEVELDB_BUILD_TESTS=OFF \
 	-DLEVELDB_BUILD_BENCHMARKS=OFF \

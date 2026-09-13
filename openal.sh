@@ -20,6 +20,8 @@ mkdir -p openal-src/build
 
 cd openal-src/build
 
+# The NDK's Release -O3 comes after the general flags, so -Ofast is repeated in the Release ones
+# NaN checks survive fast math
 cmake .. -DANDROID_STL="c++_static" \
 	-DANDROID_NATIVE_API_LEVEL="$NATIVE_API_LEVEL" \
 	-DANDROID_ABI="$ANDROID_ABI" \
@@ -44,6 +46,8 @@ cmake .. -DANDROID_STL="c++_static" \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_C_FLAGS="$CFLAGS" \
 	-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
+	-DCMAKE_C_FLAGS_RELEASE="-Ofast -fno-finite-math-only" \
+	-DCMAKE_CXX_FLAGS_RELEASE="-Ofast -fno-finite-math-only" \
 	-DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK/build/cmake/android.toolchain.cmake" \
 	-DLIBTYPE=STATIC
 #	-DSDL3_DIR="$SDL_PATH/lib/cmake/SDL3"
