@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-OBOE_VERSION=1.10.0
+OBOE_VERSION=1.11.0
 
 . ./sdk.sh
 
