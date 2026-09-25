@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      NDK_VERSION: 29.0.14206865
+      NDK_VERSION: 30.0.16248370
       CMAKE_VERSION: 4.4.x
 
     steps:
