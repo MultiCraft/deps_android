@@ -15,6 +15,7 @@ mkdir -p deps; cd deps
 
 fetch_git openal-src https://github.com/kcat/openal-soft "$OPENAL_VERSION"
 git -C openal-src cherry-pick --no-commit 681d049
+git -C openal-src cherry-pick --no-commit c86ec9e
 git -C openal-src apply "$OBOE_PATCH"
 mkdir -p openal-src/build
 
