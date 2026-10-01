@@ -1,0 +1,14 @@
+Android: the static pixman keeps its API hidden, like the rest of the build
+diff --git a/pixman/pixman-compiler.h b/pixman/pixman-compiler.h
+index 6394156..bd87ca3 100644
+--- a/pixman/pixman-compiler.h
++++ b/pixman/pixman-compiler.h
+@@ -90,7 +90,7 @@
+ #endif
+ 
+ /* GCC visibility */
+-#if defined(__GNUC__) && __GNUC__ >= 4 && !defined(_WIN32)
++#if defined(__GNUC__) && __GNUC__ >= 4 && !defined(_WIN32) && !defined(__ANDROID__)
+ #   define PIXMAN_EXPORT __attribute__ ((visibility("default")))
+ /* Sun Studio 8 visibility */
+ #elif defined(__SUNPRO_C) && (__SUNPRO_C >= 0x550)

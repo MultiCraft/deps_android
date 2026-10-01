@@ -7,6 +7,7 @@ mkdir -p output/pixman/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 fetch_git pixman-src https://gitlab.freedesktop.org/pixman/pixman.git "pixman-$PIXMAN_VERSION" --depth 1
+git -C pixman-src apply "$ANDR_ROOT/pixman-visibility.patch"
 
 cd pixman-src
 

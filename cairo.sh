@@ -7,6 +7,7 @@ mkdir -p output/cairo/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 fetch_git cairo-src https://gitlab.freedesktop.org/cairo/cairo.git "$CAIRO_VERSION" --depth 1
+git -C cairo-src apply "$ANDR_ROOT/cairo-visibility.patch"
 
 cd cairo-src
 
