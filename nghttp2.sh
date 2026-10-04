@@ -17,13 +17,14 @@ cd nghttp2-src
 
 mkdir -p build; cd build
 
-# The NDK's Release -O3 comes after the general flags, so -Ofast is repeated in the Release ones
+# The NDK's Release -O3 comes after the general flags, so -Ofast is repeated in the Release ones.
+# nghttp2 strips NDEBUG from the Release flags, so it goes with the general ones
 cmake .. -DANDROID_STL="c++_static" \
 	-DANDROID_NATIVE_API_LEVEL="$NATIVE_API_LEVEL" \
 	-DANDROID_ABI="$ANDROID_ABI" \
 	-DANDROID_PLATFORM="$API" \
 	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_C_FLAGS="$CFLAGS" \
+	-DCMAKE_C_FLAGS="$CFLAGS -DNDEBUG" \
 	-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
 	-DCMAKE_C_FLAGS_RELEASE="-Ofast" \
 	-DCMAKE_CXX_FLAGS_RELEASE="-Ofast" \
