@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-BORINGSSL_VERSION=0.20260813.0
+BORINGSSL_VERSION=0.20260929.0
 
 . ./sdk.sh
 

@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-HARFBUZZ_VERSION=14.5.0
+HARFBUZZ_VERSION=14.6.0
 
 . ./sdk.sh
 
