@@ -149,3 +149,29 @@ cpu = '$TARGET_CPU'
 endian = 'little'
 EOF
 }
+
+# A library is rebuilt only when its revision, its own recipe, sdk.sh, the NDK or a recipe it needs changes
+# stamp_check <name> <revision> <recipe>...
+stamp_check() {
+	local inputs=("$ANDR_ROOT/sdk.sh" "$ANDROID_NDK/source.properties") recipe
+	for recipe in "${@:3}"; do inputs+=("$ANDR_ROOT/$recipe"); done
+
+	STAMP="$ANDR_ROOT/stamps/$1-$TARGET_ABI"
+	STAMP_TOKEN="$2 $(cat "${inputs[@]}" | shasum | cut -c1-16)"
+
+	if [ "$(cat "$STAMP" 2>/dev/null)" = "$STAMP_TOKEN" ]; then
+		echo "$1 is up to date"
+		return 0
+	fi
+	return 1
+}
+
+stamp_write() {
+	mkdir -p "$ANDR_ROOT/stamps"
+	echo "$STAMP_TOKEN" > "$STAMP"
+}
+
+# The commit a moving branch points at, so the stamp follows upstream
+git_head() {
+	git ls-remote "$1" "${2:-HEAD}" | head -1 | cut -f1
+}

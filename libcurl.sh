@@ -3,6 +3,8 @@
 . ./sdk.sh
 CURL_VERSION=8.23.0
 
+stamp_check libcurl "$CURL_VERSION" libcurl.sh boringssl.sh nghttp2.sh && exit 0
+
 mkdir -p output/libcurl/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
@@ -46,3 +48,5 @@ rm -rf ../../output/libcurl/lib/$TARGET_ABI/libcurl.a
 cp -r lib/.libs/libcurl.a ../../output/libcurl/lib/$TARGET_ABI/libcurl.a
 
 echo "libcurl build successful"
+
+stamp_write

@@ -1,14 +1,17 @@
 #!/bin/bash -e
 
 LUAJIT_VERSION=2.1
+LUAJIT_REPO=https://github.com/LuaJIT/LuaJIT
 
 . ./sdk.sh
+
+stamp_check luajit "$(git_head "$LUAJIT_REPO" v$LUAJIT_VERSION)" luajit.sh && exit 0
 
 mkdir -p output/luajit/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
 if [ ! -d luajit-src ]; then
-	wget -nc -O luajit-$LUAJIT_VERSION.tar.gz https://github.com/LuaJIT/LuaJIT/archive/v$LUAJIT_VERSION.tar.gz || true
+	wget -nc -O luajit-$LUAJIT_VERSION.tar.gz $LUAJIT_REPO/archive/v$LUAJIT_VERSION.tar.gz || true
 	tar -xzf luajit-$LUAJIT_VERSION.tar.gz
 	mv LuaJIT-$LUAJIT_VERSION luajit-src
 fi
@@ -40,3 +43,5 @@ rm -rf ../../output/luajit/lib/$TARGET_ABI/libluajit.a
 cp src/libluajit.a ../../output/luajit/lib/$TARGET_ABI/libluajit.a
 
 echo "LuaJIT build successful"
+
+stamp_write

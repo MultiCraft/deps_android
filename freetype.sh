@@ -4,6 +4,8 @@ FREETYPE_VERSION=2.15.0
 
 . ./sdk.sh
 
+stamp_check "freetype-${1:-full}" "$FREETYPE_VERSION" freetype.sh libpng.sh harfbuzz.sh && exit 0
+
 mkdir -p output/freetype/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
@@ -64,3 +66,5 @@ rm -rf ../../../output/freetype/lib/$TARGET_ABI/libfreetype.a
 cp libfreetype.a ../../../output/freetype/lib/$TARGET_ABI/libfreetype.a
 
 echo "Freetype build successful"
+
+stamp_write

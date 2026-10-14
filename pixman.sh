@@ -3,6 +3,8 @@
 . ./sdk.sh
 PIXMAN_VERSION=0.46.4
 
+stamp_check pixman "$PIXMAN_VERSION" pixman.sh pixman-visibility.patch libpng.sh && exit 0
+
 mkdir -p output/pixman/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
@@ -40,3 +42,5 @@ rm -f ../../output/pixman/lib/$TARGET_ABI/libpixman.a
 cp "build/pixman/libpixman-1.a" ../../output/pixman/lib/$TARGET_ABI/libpixman.a
 
 echo "libpixman build successful"
+
+stamp_write

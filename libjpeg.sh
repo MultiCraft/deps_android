@@ -3,6 +3,8 @@
 . ./sdk.sh
 JPEG_VERSION=3.2.0
 
+stamp_check libjpeg "$JPEG_VERSION" libjpeg.sh && exit 0
+
 mkdir -p output/libjpeg/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
@@ -36,3 +38,5 @@ rm -rf ../../../output/libjpeg/lib/$TARGET_ABI/libjpeg.a
 cp libjpeg.a ../../../output/libjpeg/lib/$TARGET_ABI/libjpeg.a
 
 echo "libjpeg build successful"
+
+stamp_write

@@ -41,6 +41,15 @@ jobs:
         with:
           cmake-version: ${{ env.CMAKE_VERSION }}
 
+      - name: Cache the built libraries
+        uses: actions/cache@v4
+        with:
+          path: |
+            output
+            stamps
+          key: deps-${{ env.NDK_VERSION }}-${{ hashFiles('*.sh', '*.patch') }}
+          restore-keys: deps-${{ env.NDK_VERSION }}-
+
       - name: Run build scripts
         run: |
           chmod +x *.sh

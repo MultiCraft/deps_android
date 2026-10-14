@@ -4,6 +4,8 @@ BORINGSSL_VERSION=0.20260929.0
 
 . ./sdk.sh
 
+stamp_check boringssl "$BORINGSSL_VERSION" boringssl.sh && exit 0
+
 mkdir -p output/boringssl/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
@@ -42,3 +44,5 @@ rm -rf ../../../output/boringssl/lib/$TARGET_ABI/libssl.a
 cp libssl.a ../../../output/boringssl/lib/$TARGET_ABI/libssl.a
 
 echo "BoringSSL build successful"
+
+stamp_write

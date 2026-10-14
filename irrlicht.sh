@@ -2,6 +2,8 @@
 
 . ./sdk.sh
 
+stamp_check irrlicht "$(git_head https://github.com/MoNTE48/Irrlicht SDL)" irrlicht.sh libSDL.sh boringssl.sh && exit 0
+
 mkdir -p output/irrlicht/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
@@ -30,3 +32,5 @@ rm -rf ../../../../../output/irrlicht/shaders
 cp -r ../../../media/Shaders ../../../../../output/irrlicht/shaders
 
 echo "Irrlicht build successful"
+
+stamp_write

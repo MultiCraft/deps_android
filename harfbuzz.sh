@@ -7,6 +7,8 @@ HARFBUZZ_VERSION=14.6.0
 # HarfBuzz doesn't use C++ exceptions/RTTI
 CXXFLAGS="$CFLAGS -fvisibility-inlines-hidden -fno-exceptions -fno-rtti"
 
+stamp_check harfbuzz "$HARFBUZZ_VERSION" harfbuzz.sh freetype.sh libpng.sh && exit 0
+
 mkdir -p output/harfbuzz/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
@@ -44,3 +46,5 @@ rm -rf ../../../output/harfbuzz/lib/$TARGET_ABI/libharfbuzz.a
 cp libharfbuzz.a ../../../output/harfbuzz/lib/$TARGET_ABI/libharfbuzz.a
 
 echo "HarfBuzz build successful"
+
+stamp_write

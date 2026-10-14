@@ -10,6 +10,8 @@ OBOE_PATCH="$(pwd)/openal-oboe.patch"
 
 #export SDL_PATH="$(pwd)/deps/libSDL-src/build/install"
 
+stamp_check openal "$OPENAL_VERSION" openal.sh openal-oboe.patch oboe.sh && exit 0
+
 mkdir -p output/openal/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
@@ -63,3 +65,5 @@ rm -rf ../../../output/openal/lib/$TARGET_ABI/libopenal.a
 cp libopenal.a ../../../output/openal/lib/$TARGET_ABI/libopenal.a
 
 echo "OpenAL-Soft build successful"
+
+stamp_write

@@ -3,6 +3,8 @@
 . ./sdk.sh
 CAIRO_VERSION=1.18.6
 
+stamp_check cairo "$CAIRO_VERSION" cairo.sh cairo-visibility.patch freetype.sh libpng.sh pixman.sh && exit 0
+
 mkdir -p output/cairo/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
@@ -58,3 +60,5 @@ rm -f ../../output/cairo/lib/$TARGET_ABI/libcairo.a
 cp build/src/libcairo.a ../../output/cairo/lib/$TARGET_ABI/libcairo.a
 
 echo "libcairo build successful"
+
+stamp_write

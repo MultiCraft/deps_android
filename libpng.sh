@@ -3,6 +3,8 @@
 . ./sdk.sh
 PNG_VERSION=1.6.59
 
+stamp_check libpng "$PNG_VERSION" libpng.sh && exit 0
+
 mkdir -p output/libpng/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
@@ -39,3 +41,5 @@ rm -rf ../../../output/libpng/lib/$TARGET_ABI/libpng.a
 cp libpng16.a ../../../output/libpng/lib/$TARGET_ABI/libpng.a
 
 echo "libpng build successful"
+
+stamp_write

@@ -4,6 +4,8 @@ ZSTD_VERSION=1.5.7
 
 . ./sdk.sh
 
+stamp_check zstd "$ZSTD_VERSION" zstd.sh && exit 0
+
 mkdir -p output/zstd/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
@@ -41,3 +43,5 @@ rm -rf ../../../../../output/zstd/lib/$TARGET_ABI/libzstd.a
 cp  ./lib/libzstd.a ../../../../../output/zstd/lib/$TARGET_ABI/libzstd.a
 
 echo "Zstd build successful"
+
+stamp_write

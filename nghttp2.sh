@@ -4,6 +4,8 @@ NGHTTP2_VERSION=1.70.0
 
 . ./sdk.sh
 
+stamp_check nghttp2 "$NGHTTP2_VERSION" nghttp2.sh && exit 0
+
 mkdir -p output/nghttp2/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
@@ -51,3 +53,5 @@ rm -rf ../../../output/nghttp2/lib/$TARGET_ABI/libnghttp2.a
 cp lib/libnghttp2.a ../../../output/nghttp2/lib/$TARGET_ABI/libnghttp2.a
 
 echo "nghttp2 build successful"
+
+stamp_write

@@ -3,6 +3,8 @@
 . ./sdk.sh
 GETTEXT_VERSION=1.0
 
+stamp_check gettext "$GETTEXT_VERSION" gettext.sh && exit 0
+
 mkdir -p output/gettext/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
@@ -30,3 +32,5 @@ rm -rf ../../../output/gettext/lib/$TARGET_ABI/libintl.a
 cp intl/.libs/libintl.a ../../../output/gettext/lib/$TARGET_ABI/libintl.a
 
 echo "Gettext build successful"
+
+stamp_write

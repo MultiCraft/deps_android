@@ -4,6 +4,8 @@ SDL_VERSION=3.4.10-RPC
 
 . ./sdk.sh
 
+stamp_check libSDL "$(git_head https://github.com/MoNTE48/SDL "$SDL_VERSION")" libSDL.sh && exit 0
+
 mkdir -p output/libSDL/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
@@ -66,3 +68,5 @@ rm -rf ../../../output/libSDL/lib/$TARGET_ABI/libSDL.a
 cp libSDL3.a ../../../output/libSDL/lib/$TARGET_ABI/libSDL.a
 
 echo "libSDL build successful"
+
+stamp_write

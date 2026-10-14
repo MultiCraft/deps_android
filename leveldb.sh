@@ -4,6 +4,8 @@ LEVELDB_VERSION=1.23
 
 . ./sdk.sh
 
+stamp_check leveldb "$LEVELDB_VERSION" leveldb.sh && exit 0
+
 mkdir -p output/leveldb/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
@@ -42,3 +44,5 @@ rm -rf ../../../output/leveldb/lib/$TARGET_ABI/libleveldb.a
 cp libleveldb.a ../../../output/leveldb/lib/$TARGET_ABI/libleveldb.a
 
 echo "LevelDB build successful"
+
+stamp_write

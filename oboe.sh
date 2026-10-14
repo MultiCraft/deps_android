@@ -4,6 +4,8 @@ OBOE_VERSION=1.11.0
 
 . ./sdk.sh
 
+stamp_check oboe "$OBOE_VERSION" oboe.sh && exit 0
+
 mkdir -p output/oboe/lib/$TARGET_ABI
 mkdir -p deps; cd deps
 
@@ -35,3 +37,5 @@ rm -rf ../../../output/oboe/lib/$TARGET_ABI/liboboe.a
 cp liboboe.a ../../../output/oboe/lib/$TARGET_ABI/liboboe.a
 
 echo "Oboe build successful"
+
+stamp_write
