@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 . ./sdk.sh
-CAIRO_VERSION=1.18.4
+CAIRO_VERSION=1.18.6
 
 mkdir -p output/cairo/lib/$TARGET_ABI
 mkdir -p deps; cd deps
