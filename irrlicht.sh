@@ -12,11 +12,12 @@ fetch_git irrlicht-src https://github.com/MoNTE48/Irrlicht SDL --depth 1
 cd irrlicht-src/source/Irrlicht/Android-SDL
 
 export SDL_PATH="$OUTPUT_PATH/libSDL/"
+# No JPEG writer: the game takes no screenshots on Android
 $ANDROID_NDK/ndk-build -j \
 	NDEBUG=1 \
 	APP_ABI="$TARGET_ABI" \
 	APP_PLATFORM=android-"$API" \
-	APP_CFLAGS="$CFLAGS -I$OUTPUT_PATH/boringssl/include" \
+	APP_CFLAGS="$CFLAGS -DNO_IRR_COMPILE_WITH_JPG_WRITER_ -I$OUTPUT_PATH/boringssl/include" \
 	APP_CXXFLAGS="$CXXFLAGS -std=gnu++17" \
 	APP_CPPFLAGS="$APP_CXXFLAGS -I$OUTPUT_PATH/libjpeg/include -I$OUTPUT_PATH/libpng/include" \
 	APP_STL="c++_static"
