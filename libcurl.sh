@@ -3,7 +3,7 @@
 . ./sdk.sh
 CURL_VERSION=8.23.0
 
-stamp_check libcurl "$CURL_VERSION" libcurl.sh boringssl.sh nghttp2.sh && exit 0
+stamp_check libcurl "$CURL_VERSION" libcurl.sh libcurl-boringssl.patch boringssl.sh nghttp2.sh && exit 0
 
 mkdir -p output/libcurl/lib/$TARGET_ABI
 mkdir -p deps; cd deps
@@ -12,6 +12,8 @@ if [ ! -d libcurl-src ]; then
 	wget -nc https://curl.haxx.se/download/curl-$CURL_VERSION.tar.gz
 	tar -xaf curl-$CURL_VERSION.tar.gz
 	mv curl-$CURL_VERSION libcurl-src
+	# curl dfab21a94, after 8.23.0: BoringSSL now declares ASN1_STRING_get_length too
+	patch -d libcurl-src -p1 < "$ANDR_ROOT/libcurl-boringssl.patch"
 fi
 
 cd libcurl-src

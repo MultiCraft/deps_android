@@ -1,0 +1,89 @@
+From dfab21a9454065ddec5422052b1b902f5efc7c46 Mon Sep 17 00:00:00 2001
+From: Viktor Szakats <commit@vsz.me>
+Date: Tue, 20 Oct 2026 21:53:23 +0200
+Subject: [PATCH] openssl: avoid OpenSSL API namespace for local fallback
+ symbol
+
+To avoid name clash when building against OpenSSL forks implementing
+this API.
+
+Fixing, when building against BoringSSL 0.20261020.0:
+```
+lib/vtls/openssl.c:173:15: error: static declaration of 'ASN1_STRING_get_length' follows non-static declaration
+  173 | static size_t ASN1_STRING_get_length(const ASN1_STRING *str)
+      |               ^~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/runner/pkg/boringssl/include/openssl/x509.h:23,
+                 from /home/runner/pkg/boringssl/include/openssl/pem.h:25,
+                 from /home/runner/pkg/boringssl/include/openssl/ssl.h:24,
+                 from /home/runner/work/curl/curl/lib/vtls/openssl.h:69,
+                 from /home/runner/work/curl/curl/lib/vtls/openssl.c:37:
+
+/home/runner/pkg/boringssl/include/openssl/asn1.h:525:23: note: previous declaration of 'ASN1_STRING_get_length'
+  with type 'size_t(const ASN1_STRING *)' {aka 'long unsigned int(const struct asn1_string_st *)'}
+
+  525 | OPENSSL_EXPORT size_t ASN1_STRING_get_length(const ASN1_STRING *str);
+      |                       ^~~~~~~~~~~~~~~~~~~~~~
+```
+Ref: https://github.com/curl/curl/actions/runs/39485527308/job/118844815062?pr=23519#step:38:42
+
+Ref: #23519
+Follow-up to 978cce12adb7251b48a9dfa03a817df83f15cfaf #23215
+
+Closes #23520
+---
+ lib/vtls/openssl.c | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
+
+diff --git a/lib/vtls/openssl.c b/lib/vtls/openssl.c
+index 6ec9301cc8e3..a86e8726acbe 100644
+--- a/lib/vtls/openssl.c
++++ b/lib/vtls/openssl.c
+@@ -169,8 +169,10 @@ typedef unsigned long sslerr_t;
+ #endif
+ #define ossl_valsize_t numcert_t
+ 
+-#if OPENSSL_VERSION_NUMBER < 0x40100000L
+-static size_t ASN1_STRING_get_length(const ASN1_STRING *str)
++#if OPENSSL_VERSION_NUMBER >= 0x40100000L
++#define ossl_ASN1_STRING_get_length ASN1_STRING_get_length
++#else
++static size_t ossl_ASN1_STRING_get_length(const ASN1_STRING *str)
+ {
+    const int length = ASN1_STRING_length(str);
+    return length >= 0 ? (size_t)length : 0;
+@@ -426,7 +428,7 @@ static CURLcode ossl_certchain(struct Curl_easy *data, SSL *ssl)
+     {
+       ASN1_INTEGER *num = X509_get_serialNumber(x);
+       const unsigned char *numdata = ASN1_STRING_get0_data(num);
+-      const size_t numlen = ASN1_STRING_get_length(num);
++      const size_t numlen = ossl_ASN1_STRING_get_length(num);
+       if(ASN1_STRING_type(num) == V_ASN1_NEG_INTEGER)
+         BIO_puts(mem, "-");
+       for(j = 0; j < numlen; j++)
+@@ -501,7 +503,7 @@ static CURLcode ossl_certchain(struct Curl_easy *data, SSL *ssl)
+ 
+     if(!result && psig) {
+       const unsigned char *psigdata = ASN1_STRING_get0_data(psig);
+-      const size_t psiglen = ASN1_STRING_get_length(psig);
++      const size_t psiglen = ossl_ASN1_STRING_get_length(psig);
+       for(j = 0; j < psiglen; j++)
+         BIO_printf(mem, "%02x:", psigdata[j]);
+       result = push_certinfo(data, mem, "Signature", i);
+@@ -2113,7 +2115,7 @@ static CURLcode ossl_verifyhost(struct Curl_easy *data,
+       if(check->type == target) {
+         /* get data and length */
+         const char *altptr = (const char *)ASN1_STRING_get0_data(check->d.ia5);
+-        size_t altlen = ASN1_STRING_get_length(check->d.ia5);
++        size_t altlen = ossl_ASN1_STRING_get_length(check->d.ia5);
+ 
+         switch(target) {
+         case GEN_DNS: /* name/pattern comparison */
+@@ -2184,7 +2186,7 @@ static CURLcode ossl_verifyhost(struct Curl_easy *data,
+          conditional in the future when OpenSSL has been fixed. */
+       if(tmp) {
+         if(ASN1_STRING_type(tmp) == V_ASN1_UTF8STRING) {
+-          cnlen = ASN1_STRING_get_length(tmp);
++          cnlen = ossl_ASN1_STRING_get_length(tmp);
+           cn = (unsigned char *)CURL_UNCONST(ASN1_STRING_get0_data(tmp));
+         }
+         else { /* not a UTF8 name */
