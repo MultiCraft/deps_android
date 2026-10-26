@@ -15,6 +15,7 @@ export SDL_PATH="$OUTPUT_PATH/libSDL/"
 # No JPEG writer: the game takes no screenshots on Android
 $ANDROID_NDK/ndk-build -j \
 	NDEBUG=1 \
+	LOCAL_CPP_FEATURES="rtti exceptions" \
 	APP_ABI="$TARGET_ABI" \
 	APP_PLATFORM=android-"$API" \
 	APP_CFLAGS="$CFLAGS -DNO_IRR_COMPILE_WITH_JPG_WRITER_ -I$OUTPUT_PATH/boringssl/include" \
