@@ -44,6 +44,8 @@ cp ../src/*.h ../../../output/harfbuzz/include/harfbuzz
 # update lib
 rm -rf ../../../output/harfbuzz/lib/$TARGET_ABI/libharfbuzz.a
 cp libharfbuzz.a ../../../output/harfbuzz/lib/$TARGET_ABI/libharfbuzz.a
+rm -rf ../../../output/harfbuzz/lib/$TARGET_ABI/libharfbuzz-raster.a
+cp libharfbuzz-raster.a ../../../output/harfbuzz/lib/$TARGET_ABI/libharfbuzz-raster.a
 
 echo "HarfBuzz build successful"
 
