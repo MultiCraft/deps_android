@@ -61,7 +61,7 @@ fi
 ./openal.sh
 ./nghttp2.sh
 ./libcurl.sh
-./vorbis.sh
+./libnogg.sh
 ./zstd.sh
 
 echo "Done building for $ARCH!"
