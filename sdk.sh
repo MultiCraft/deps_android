@@ -22,25 +22,19 @@ case "$ARCH" in
 		export TARGET_ABI=armeabi-v7a
 		export TARGET_NAME=android-arm
 		export ANDROID_ABI="$TARGET_ABI with NEON"
-		export TARGET=armv7a-linux-androideabi
-		export TARGET_CPU_FAMILY=arm
-		export TARGET_CPU=armv7a ;;
+		export TARGET=armv7a-linux-androideabi ;;
 	"arm64")
 		### toolchain config for ARM64
 		export TARGET_ABI=arm64-v8a
 		export TARGET_NAME=android-arm64
 		export ANDROID_ABI=$TARGET_ABI
-		export TARGET=aarch64-linux-android
-		export TARGET_CPU_FAMILY=aarch64
-		export TARGET_CPU=armv8 ;;
+		export TARGET=aarch64-linux-android ;;
 	"x86_64")
 		### toolchain config for x86_64
 		export TARGET_ABI=x86_64
 		export TARGET_NAME=android-x86_64
 		export ANDROID_ABI=$TARGET_ABI
-		export TARGET=x86_64-linux-android
-		export TARGET_CPU_FAMILY=x86_64
-		export TARGET_CPU=x86_64 ;;
+		export TARGET=x86_64-linux-android ;;
 	*)
 		echo "Don't ask to use $ARCH"
 		exit 1 ;;
@@ -90,64 +84,6 @@ fetch_git() {
 	git -C "$dest" fetch --depth 1 origin "${branch:-HEAD}"
 	git -C "$dest" reset --hard FETCH_HEAD
 	git -C "$dest" clean -xdff
-}
-
-# Convert a space-separated flag list into a Meson array literal, e.g. "['-a', '-b']"
-to_meson_list() {
-	local out="[" first=1 flag
-	for flag in $1; do
-		[ $first -eq 1 ] && first=0 || out+=", "
-		out+="'$flag'"
-	done
-	echo "$out]"
-}
-
-# Generate a minimal pkg-config file pointing at an already-built dependency
-# write_pc_file <Name> <prefix> <libname> <out_file>
-write_pc_file() {
-	cat > "$4" << EOF
-prefix=$2
-exec_prefix=\${prefix}
-libdir=\${prefix}/lib/$TARGET_ABI
-includedir=\${prefix}/include
-
-Name: $1
-Description:
-Version: 999
-Libs: -L\${libdir} -l$3
-Cflags: -I\${includedir}
-EOF
-}
-
-# Generate a Meson cross file for the current target
-# write_meson_cross_file <out_file> <extra include flags> <extra lib dirs>
-write_meson_cross_file() {
-	cat > "$1" << EOF
-[binaries]
-c = '$CC'
-cpp = '$CXX'
-ar = '$AR'
-ranlib = '$RANLIB'
-strip = '$STRIP'
-pkg-config = 'pkg-config'
-
-[built-in options]
-c_args = $(to_meson_list "$CFLAGS $2")
-c_link_args = $(to_meson_list "-flto $3")
-cpp_args = $(to_meson_list "$CXXFLAGS $2")
-cpp_link_args = $(to_meson_list "-flto $3")
-
-[properties]
-sys_root = '$TOOLCHAIN/sysroot'
-needs_exe_wrapper = true
-pkg_config_libdir = '$(pwd)/pkgconfig'
-
-[host_machine]
-system = 'android'
-cpu_family = '$TARGET_CPU_FAMILY'
-cpu = '$TARGET_CPU'
-endian = 'little'
-EOF
 }
 
 # A library is rebuilt only when its revision, its own recipe, sdk.sh, the NDK or a recipe it needs changes
