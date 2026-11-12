@@ -15,6 +15,17 @@ if [ ! -d leveldb-src ]; then
 	mv leveldb-$LEVELDB_VERSION leveldb-src
 	mkdir leveldb-src/build
 fi
+# Reads never start a compaction: a walk over a built map does not rewrite it
+case "$OSTYPE" in
+	darwin*)
+	sed -i '' 's|f->allowed_seeks = static_cast<int>.*;|f->allowed_seeks = 1 << 30;|' \
+		leveldb-src/db/version_set.cc
+	;;
+	*)
+	sed -i 's|f->allowed_seeks = static_cast<int>.*;|f->allowed_seeks = 1 << 30;|' \
+		leveldb-src/db/version_set.cc
+	;;
+esac
 
 cd leveldb-src/build
 
