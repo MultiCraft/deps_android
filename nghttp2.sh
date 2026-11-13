@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-NGHTTP2_VERSION=1.70.0
+NGHTTP2_VERSION=1.71.0
 
 . ./sdk.sh
 
