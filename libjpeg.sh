@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 . ./sdk.sh
-JPEG_VERSION=3.2.0
+JPEG_VERSION=3.2.1
 
 stamp_check libjpeg "$JPEG_VERSION" libjpeg.sh && exit 0
 
