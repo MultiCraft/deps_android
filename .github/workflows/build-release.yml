@@ -12,19 +12,16 @@ jobs:
 
     env:
       NDK_VERSION: 30.0.16248370
-      CMAKE_VERSION: 4.4.x
+      CMAKE_VERSION: 4.5.x
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install dependencies
         run: |
-          sudo dpkg --add-architecture i386
           sudo apt-get update
-          sudo apt-get install -y build-essential libc6-dev libc6-dev:i386 \
-          gcc-multilib g++-multilib \
-          dos2unix
+          sudo apt-get install -y gcc-multilib
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v4
@@ -42,7 +39,7 @@ jobs:
           cmake-version: ${{ env.CMAKE_VERSION }}
 
       - name: Cache the built libraries
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             output
