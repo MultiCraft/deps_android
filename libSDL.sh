@@ -54,7 +54,7 @@ cmake .. -DANDROID_STL="c++_static" \
 	-DSDL_TESTS=OFF \
 	-DSDL_TRAY=OFF \
 	-DSDL_EXAMPLES=OFF \
-	-DSDL_VULKAN=OFF \
+	-DSDL_VULKAN=ON \
 	-DCMAKE_INSTALL_PREFIX="$(pwd)/install"
 
 cmake --build . -j
